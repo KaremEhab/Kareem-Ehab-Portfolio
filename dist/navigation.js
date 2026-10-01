@@ -66,8 +66,6 @@
   if ('IntersectionObserver' in window) {
     const motionObserver = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; requestScroll(); }, {rootMargin:'80px 0px'});
     motionObserver.observe(visual);
-    const briefDockObserver = new IntersectionObserver(entries => { briefButton.classList.toggle('is-docked', entries[0].isIntersecting); }, {rootMargin:'0px 0px -35% 0px', threshold:0});
-    briefDockObserver.observe(visual);
     const ticker = document.querySelector('.ticker');
     const tickerObserver = new IntersectionObserver(entries => ticker.classList.toggle('ticker-visible', entries[0].isIntersecting));
     tickerObserver.observe(ticker);

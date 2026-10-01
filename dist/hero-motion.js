@@ -58,10 +58,6 @@
   });
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   let paused=reduced.matches, visible=true, frame=0, last=0, elapsed=0;
-  const button=document.createElement('button');
-  button.type='button'; button.className='hero-motion-toggle'; button.dataset.noTranslate='';
-  const label=()=>{button.textContent=paused?'Play motion':'Pause motion';button.setAttribute('aria-label',paused?'Play hero animation':'Pause hero animation');};
-  label(); document.querySelector('.hero-selected-stage').append(button);
   function render() {
     const t=elapsed/1000;
     // A small circular drift and angular turn keep the sculpture in its original composition.
@@ -81,8 +77,7 @@
     last=now; render(); frame=requestAnimationFrame(tick);
   }
   function sync(){cancelAnimationFrame(frame);frame=0;last=0;if(!paused&&visible&&!document.hidden)frame=requestAnimationFrame(tick);}
-  button.addEventListener('click',()=>{paused=!paused;label();sync();});
-  reduced.addEventListener('change',()=>{paused=reduced.matches;label();sync();});
+  reduced.addEventListener('change',()=>{paused=reduced.matches;sync();});
   document.addEventListener('visibilitychange',sync);
   new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;sync();}).observe(anchor);
   render();sync();

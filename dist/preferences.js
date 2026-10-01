@@ -194,6 +194,10 @@
   });
   Object.assign(translations, {
     'Ideas in motion.':'أفكار في حركة.','Ideas':'أفكار','in':'في','motion':'حركة','motion.':'حركة.',
+    'Thoughtful design. Playful by nature.':'تصميم مدروس. بروح مرحة.',
+    'Discover my work':'اكتشف أعمالي',
+    'A new product, a better experience, or something unexpected. Tell me what you have in mind.':'منتج جديد، تجربة أفضل، أو فكرة مختلفة. احكي لي ما يدور في بالك.',
+    'Go to project brief':'انتقل إلى تفاصيل المشروع',
     'UI/UX design with clarity, rhythm, and joy.':'تصميم UI/UX بوضوح، وإيقاع، ولمسة بهجة.',
     'Scroll to move':'مرّر لتحرّك المجسم',
     'Interactive cobalt three-dimensional orbital sculpture':'مجسم مداري أزرق ثلاثي الأبعاد وتفاعلي',
