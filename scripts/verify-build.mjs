@@ -10,7 +10,10 @@ const requiredFiles = [
   "navigation.js",
   "preferences.js",
   "cursor.js",
-  "logo.svg"
+  "logo.svg",
+  "hero-motion.js",
+  "hero-motion.css",
+  "hero-blue-isolated.png"
 ];
 
 await Promise.all(
