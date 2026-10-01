@@ -1,0 +1,26 @@
+import { access, readFile } from "node:fs/promises";
+import { resolve } from "node:path";
+
+const outputDirectory = resolve("dist");
+const requiredFiles = [
+  "index.html",
+  "style.css",
+  "app.js",
+  "interactions.js",
+  "navigation.js",
+  "preferences.js",
+  "cursor.js",
+  "logo.svg"
+];
+
+await Promise.all(
+  requiredFiles.map((file) => access(resolve(outputDirectory, file)))
+);
+
+const html = await readFile(resolve(outputDirectory, "index.html"), "utf8");
+
+if (!html.includes("<title>Karem Ehab — UI/UX Designer</title>")) {
+  throw new Error("dist/index.html is missing the expected page title.");
+}
+
+console.log(`Verified ${requiredFiles.length} required production files in dist/.`);
