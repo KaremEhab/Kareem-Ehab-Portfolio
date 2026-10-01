@@ -47,7 +47,7 @@
       const scale = 1 - progress * .035;
       // Touch scrolling uses a single composited 2D transform; no per-frame layout reads.
       const tilt = finePointer.matches ? ` rotateX(${currentY * .38}deg) rotateY(${currentX * .42}deg)` : '';
-      model.style.transform = `translate3d(-50%,calc(-50% + ${y.toFixed(2)}px),0)${tilt} rotateZ(${z.toFixed(3)}deg) scale(${scale.toFixed(5)})`;
+      model.style.transform = `translate3d(0,${y.toFixed(2)}px,0)${tilt} rotateZ(${z.toFixed(3)}deg) scale(${scale.toFixed(5)})`;
       if (Math.abs(targetProgress - progress) > .0001 || Math.abs(pointerX - currentX) > .01 || Math.abs(pointerY - currentY) > .01) {
         frame = requestAnimationFrame(renderModel);
       } else lastTime = 0;
