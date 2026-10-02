@@ -19,7 +19,7 @@
   document.addEventListener('focusin', event => {
     if (!menu.hidden && !document.querySelector('#siteHeader').contains(event.target)) setMenu(false);
   });
-  document.querySelector('.menu-contact').addEventListener('click', () => setMenu(false));
+  document.querySelector('.menu-contact')?.addEventListener('click', () => setMenu(false));
   document.querySelectorAll('.site-header nav a,.site-header .brand').forEach(link => link.addEventListener('click', () => setMenu(false)));
   const headerLinks = [...document.querySelectorAll('.site-header nav a')];
   if ('IntersectionObserver' in window) {

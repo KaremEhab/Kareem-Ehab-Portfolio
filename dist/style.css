@@ -321,3 +321,61 @@ html[dir=rtl] .hero-selected-title,html[dir=rtl] .hero-selected-outline{font-fam
   .hero-selected-action .pill{padding:14px 20px}
   .hero-scroll-note{bottom:28px}
 }
+
+/* Case reader v3 — spacious editorial storytelling with a playful Karem accent. */
+.header-menu-compact{padding-top:12px}.header-menu-compact .menu-row:first-child{border-top:0}.header-menu-compact .menu-row:last-child{border-bottom:0}
+.case-dialog{width:100vw;height:100dvh;border:0;border-radius:0;background:var(--paper);box-shadow:none}
+.case-dialog::backdrop{background:rgba(13,16,24,.72)}
+.case-close{top:22px;right:22px;width:58px;height:58px;border-color:var(--border);background:color-mix(in srgb,var(--paper) 88%,transparent);color:var(--ink)}
+.case-study{width:min(1600px,100%);margin-inline:auto;padding-bottom:20px}
+.case-opening{min-height:clamp(700px,92dvh,940px);padding:36px clamp(28px,6vw,96px) 64px;display:grid;grid-template-rows:auto 1fr auto;gap:50px;overflow:hidden}
+.case-opening:after{width:clamp(170px,18vw,280px);right:auto;left:5%;top:auto;bottom:17%;border:2px solid var(--case-accent);border-radius:48% 52% 44% 56%/58% 43% 57% 42%;opacity:.58;transform:rotate(-18deg) scale(.8)}
+.case-entered .case-opening:after{transform:rotate(10deg) scale(1)}
+.case-opening-top{padding-right:70px}
+.case-lockup{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;text-align:center;position:relative;z-index:1}
+.case-lockup .case-tag{margin:0 0 34px;transform:rotate(-2.5deg);box-shadow:6px 7px 0 color-mix(in srgb,var(--ink) 13%,transparent)}
+.case-title{font-size:clamp(100px,15vw,230px);line-height:.78;text-align:center;white-space:normal}
+.case-intro{max-width:28ch;margin:42px auto 0;font-size:clamp(22px,2.2vw,34px);line-height:1.22;text-align:center;color:var(--muted)}
+.case-play-mark{position:absolute;right:6%;bottom:7%;display:flex;align-items:center;gap:8px;transform:rotate(-8deg)}
+.case-play-mark i{display:block;width:14px;height:14px;border-radius:50%;background:var(--case-accent);box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 18%,transparent)}
+.case-play-mark i:nth-child(2){width:26px;height:8px;border-radius:999px;background:var(--case-contrast);transform:rotate(-18deg)}
+.case-play-mark i:nth-child(3){width:11px;height:11px;border-radius:2px;background:#ff835f;transform:rotate(38deg)}
+.case-meta{width:min(920px,100%);margin:0 auto;padding:28px 0 0;border-top:1px solid var(--border);border-radius:0;background:transparent;grid-template-columns:.6fr 1.3fr 1fr 1.1fr;gap:32px;opacity:1;transform:none}
+.case-meta div,.case-meta div:last-child{padding:0;border:0}.case-meta dt{color:var(--muted)}.case-meta dd{font-size:16px;color:var(--ink);font-weight:500}
+.case-visual{margin:0 clamp(10px,1.5vw,24px);border-radius:18px;aspect-ratio:1.72;box-shadow:none}
+.case-visual figcaption{left:18px;right:18px;bottom:18px}
+.case-explainer{margin:clamp(110px,13vw,190px) clamp(10px,1.5vw,24px)}
+.case-story{margin:clamp(110px,14vw,210px) clamp(30px,9vw,150px);gap:0}
+.case-section,.case-section-2,.case-section-3,.case-section-4{position:relative;margin:0;padding:clamp(72px,9vw,126px) 0;grid-template-columns:minmax(260px,.8fr) minmax(340px,1fr);gap:clamp(64px,10vw,150px);border:0;border-top:1px solid var(--border);border-radius:0;background:transparent;color:var(--ink)}
+.case-section:last-child{border-bottom:1px solid var(--border)}
+.case-section-3 .case-section-heading,.case-section-3 .case-section-copy{padding:0}
+.case-section-label,.case-section-2 .case-section-label,.case-section-4 .case-section-label{border-color:var(--border);color:var(--muted)}
+.case-section h3{font-size:clamp(42px,5vw,74px)}
+.case-section p,.case-section-2 p,.case-section-4 p{max-width:43ch;font-size:19px;line-height:1.82;color:var(--muted)}
+.case-section-heading:after{content:'';display:block;width:48px;height:12px;margin-top:34px;border-radius:999px;background:var(--case-accent);transform:rotate(-5deg);transition:width .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1)}
+.case-section:hover .case-section-heading:after{width:82px;transform:rotate(3deg)}
+.case-points{grid-template-columns:repeat(3,minmax(0,1fr))}.case-points li{background:var(--panel);border-radius:16px}.case-points li:hover{background:var(--case-accent)}
+.case-showcase{margin-top:clamp(100px,13vw,180px)}
+.case-next{border-radius:20px}
+html[data-effective-theme=dark] .case-lockup .case-tag{color:#191a1c}html[data-effective-theme=dark] .case-section-4{color:var(--ink)}
+html[dir=rtl] .case-opening-top{padding-right:0;padding-left:70px}html[dir=rtl] .case-opening:after{left:auto;right:5%}html[dir=rtl] .case-play-mark{right:auto;left:6%}
+@media(max-width:760px){
+  .case-close{top:14px;right:14px;width:52px;height:52px}
+  .case-opening{min-height:720px;padding:90px 7% 48px;gap:38px}
+  .case-opening:after{width:150px;left:-62px;bottom:25%;border-width:2px}
+  .case-opening-top{padding-right:54px;flex-direction:row;align-items:flex-start;gap:16px}
+  .case-lockup .case-tag{margin-bottom:28px;max-width:88%}
+  .case-title{font-size:clamp(72px,22vw,112px);line-height:.8}
+  .case-intro{max-width:18ch;margin-top:32px;font-size:clamp(23px,6.7vw,31px)}
+  .case-play-mark{right:2%;bottom:5%}
+  .case-meta{grid-template-columns:1fr 1fr;gap:0;padding-top:16px}
+  .case-meta div{display:block;padding:14px 12px 14px 0;border-bottom:1px solid var(--border)}
+  .case-meta div:nth-child(even){padding-left:12px;padding-right:0}
+  .case-meta dd{margin-top:7px;font-size:15px}
+  .case-visual{aspect-ratio:.92;border-radius:14px}.case-visual figcaption{left:10px;right:10px;bottom:10px}
+  .case-story{margin:86px 7%}.case-section,.case-section-2,.case-section-3,.case-section-4{grid-template-columns:1fr;gap:36px;padding:68px 0;border-radius:0}.case-section h3{font-size:clamp(38px,11vw,50px)}.case-section p{font-size:16px}.case-section-heading:after{margin-top:24px}
+  .case-points{grid-template-columns:1fr}.case-points li{min-height:92px}
+  .case-next{border-radius:14px}
+  html[dir=rtl] .case-opening-top{padding-right:0;padding-left:54px}html[dir=rtl] .case-opening:after{right:-62px;left:auto}html[dir=rtl] .case-play-mark{left:2%;right:auto}
+}
+@media(prefers-reduced-motion:reduce){.case-play-mark,.case-section-heading:after{transition:none!important}}

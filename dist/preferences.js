@@ -107,7 +107,7 @@
     'Skills':'المهارات','Design':'التصميم','Tools':'الأدوات','Build':'التنفيذ',
     'Product Design':'تصميم المنتجات','Adobe Creative Suite':'حزمة أدوبي الإبداعية','Front-end collaboration':'التعاون مع مطوري الواجهات',
     'Blender':'بلندر','Alexandria, Egypt':'الإسكندرية، مصر',
-    'Role':'الدور','Platform':'المنصة','Scope':'النطاق','Product design':'تصميم المنتج','Mobile':'الهاتف','Responsive web':'ويب متجاوب',
+    'Year':'السنة','Role':'الدور','Platform':'المنصة','Scope':'النطاق','Product design':'تصميم المنتج','Mobile':'الهاتف','Responsive web':'ويب متجاوب',
     'Fintech concept':'تصور تقنية مالية','Food pickup concept':'تصور طلب واستلام الطعام','Workspace concept':'تصور مساحة عمل','UI/UX design':'تصميم الواجهات والتجربة',
     'Keep exploring':'واصل الاستكشاف','01 / CHALLENGE':'٠١ / التحدي','02 / APPROACH':'٠٢ / الأسلوب','03 / DESIGN DECISIONS':'٠٣ / قرارات التصميم','04 / OUTCOME':'٠٤ / النتيجة',
     'A calmer way to understand everyday money.':'طريقة أهدأ لفهم أموالك اليومية.',
