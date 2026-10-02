@@ -13,7 +13,10 @@ const requiredFiles = [
   "logo.svg",
   "hero-motion.js",
   "hero-motion.css",
-  "hero-blue-isolated.png"
+  "hero-blue-isolated.png",
+  "alexandria-sea-night.png",
+  "alexandria-coast-night.png",
+  "alexandria-shore-night.png"
 ];
 
 await Promise.all(

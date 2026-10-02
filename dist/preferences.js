@@ -81,6 +81,10 @@
     'Illustrated Mediterranean bay with a seaside city, distant hills, and coastal greenery':'رسم لخليج متوسطي ومدينة ساحلية وتلال بعيدة ونباتات خضراء'
   });
   Object.assign(translations, {
+    'Project type':'نوع المشروع','Choose a project type':'اختر نوع المشروع','App':'تطبيق','Website':'موقع إلكتروني',
+    'Send by email':'أرسل بالبريد الإلكتروني','Send on WhatsApp':'أرسل عبر واتساب'
+  });
+  Object.assign(translations, {
     'Score':'النتيجة','Best':'الأفضل','Restart game':'إعادة اللعبة','points':'نقاط','High score:':'أعلى نتيجة:','New game':'لعبة جديدة','lives':'فرص',
     'Find six pairs. +100 per match, −10 per miss.':'اعثر على ستة أزواج. +١٠٠ للتطابق، −١٠ للخطأ.',
     'Find the lighter tile. +100 points, streak bonuses, 3 lives.':'اعثر على المربع الأفتح. +١٠٠ نقطة ومكافآت للتتابع، و٣ فرص.',
@@ -268,6 +272,10 @@
     root.dataset.effectiveTheme = preference === 'system' ? (systemTheme.matches ? 'dark' : 'light') : preference;
     themeControl.value = preference;
     document.querySelector('meta[name="theme-color"]').content = root.dataset.effectiveTheme === 'dark' ? '#101218' : '#f5f5f3';
+    document.querySelectorAll('[data-light-src][data-dark-src]').forEach(image => {
+      const nextSource = root.dataset.effectiveTheme === 'dark' ? image.dataset.darkSrc : image.dataset.lightSrc;
+      if (image.getAttribute('src') !== nextSource) image.setAttribute('src', nextSource);
+    });
   }
   themeControl.addEventListener('change', () => {
     root.dataset.theme = themeControl.value;

@@ -49,13 +49,16 @@
 .footer-brief { display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,8vw,120px); padding:0 0 72px; }
 .footer-brief-copy h2 { font-size:clamp(40px,5vw,72px); max-width:10ch; margin-bottom:24px; }
 .footer-brief-copy p { max-width:34ch; line-height:1.7; color:var(--muted); font-size:18px; }
-.brief-email { display:inline-block; margin-top:28px; text-decoration:underline; text-underline-offset:5px; overflow-wrap:anywhere; }
 .footer-brief #briefForm { display:grid; gap:22px; margin:0; }
 .footer-brief label { display:grid; gap:10px; font-size:14px; color:var(--ink); }
-.footer-brief input,.footer-brief textarea { width:100%; min-width:0; border:1px solid var(--border,#ccc); background:var(--paper); color:var(--ink); border-radius:12px; padding:15px 16px; font-size:16px; line-height:1.5; }
+.footer-brief input,.footer-brief select,.footer-brief textarea { width:100%; min-width:0; border:1px solid var(--border,#ccc); background:var(--paper); color:var(--ink); border-radius:12px; padding:15px 16px; font:inherit; font-size:16px; line-height:1.5; }
+.footer-brief select { min-height:56px; cursor:pointer; color-scheme:light dark; }
+.footer-brief input:focus-visible,.footer-brief select:focus-visible,.footer-brief textarea:focus-visible { outline:3px solid color-mix(in srgb,var(--blue) 32%,transparent); outline-offset:2px; border-color:var(--blue); }
 .footer-brief textarea { resize:vertical; min-height:140px; }
 .footer-brief .pill { justify-self:start; background:var(--blue); color:white; }
-.footer-brief .form-note { font-size:14px; line-height:1.6; color:var(--muted); margin:0; }
+.brief-actions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.footer-brief .brief-actions .pill { width:100%; display:inline-flex; align-items:center; justify-content:space-between; gap:12px; min-height:50px; padding:13px 16px; font-size:14px; text-align:start; }
+.footer-brief .brief-actions .brief-whatsapp { background:#1f9d61; color:#fff; }
 @media(max-width:900px) {
  .hero-selected-stage { height:clamp(620px,82vw,760px); }
  .hero-orbit-anchor { width:94%; top:43%; }
@@ -77,6 +80,8 @@
  .footer-brief-copy h2 { max-width:none; }
  .footer-brief-copy p { font-size:16px; }
  .footer-brief .pill { width:100%; justify-content:space-between; }
+ .brief-actions { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+ .footer-brief .brief-actions .pill { padding-inline:13px; font-size:12px; }
 }
 @media(orientation:landscape) and (max-height:600px) and (min-width:641px) {
  .hero-selected-stage { height:calc(61vw + 100px); }
