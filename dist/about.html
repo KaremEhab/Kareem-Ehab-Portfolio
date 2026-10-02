@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=spatino-1">
+  <link rel="stylesheet" href="silver-face.css?v=1">
 </head>
 <body class="spatino-body">
   <header class="spatino-header-wrap" id="siteHeader">
@@ -41,8 +42,14 @@
     <!-- Hero Portrait Section -->
     <section class="spatino-hero-section">
       <div class="spatino-container">
-        <div class="spatino-hero-frame">
-          <img src="about-hero-portrait.jpg" alt="Portrait of Karem Ehab in his studio in Alexandria overlooking the sea" width="1920" height="1080" fetchpriority="high" decoding="async">
+        <div class="silver-stage" id="silverStage">
+          <div class="silver-intro"><span>THE FACE BEHIND THE PIXELS</span><h1>Curious by nature.<br><em>Designer by choice.</em></h1></div>
+          <div class="silver-portrait" id="silverPortrait">
+            <img id="silverFallback" src="karem-silver-portrait.png" alt="Silver portrait of Karem Ehab" width="1161" height="1354" fetchpriority="high">
+            <canvas id="silverCanvas" role="img" aria-label="Interactive silver portrait of Karem Ehab that follows your pointer and blinks"></canvas>
+          </div>
+          <div class="silver-caption"><span>KAREM EHAB<br>UI/UX · ALEXANDRIA</span><button type="button" id="silverWave">Say hello <span aria-hidden="true">↗</span></button></div>
+          <button type="button" id="silverMotion" class="silver-motion" aria-pressed="false">Pause motion</button>
         </div>
       </div>
     </section>
@@ -177,7 +184,7 @@
       <div class="spatino-footer-content">
         <h2 class="spatino-footer-title">Connect, collaborate,<br>or just say hello</h2>
         <div class="spatino-footer-email-row">
-          <a href="mailto:karemehab2323@gmail.com" class="spatino-footer-email">karemehab2323@gmail.com <span>↗</span></a>
+          <a href="./#contact" class="spatino-footer-email">Tell me your idea <span>↗</span></a>
         </div>
         <div class="spatino-footer-links">
           <a href="https://wa.me/201112190563" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
@@ -193,7 +200,8 @@
     </div>
   </footer>
 
-  <script src="preferences.js?v=spatino-1"></script>
+  <script src="preferences.js?v=silver-1"></script>
   <script src="about-page.js?v=spatino-1"></script>
+  <script src="silver-face.js?v=1"></script>
 </body>
 </html>

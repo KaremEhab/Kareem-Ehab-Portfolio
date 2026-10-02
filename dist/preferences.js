@@ -6,6 +6,12 @@
   const systemTheme = matchMedia('(prefers-color-scheme: dark)');
   let locale = root.lang === 'ar' ? 'ar' : 'en';
   const translations = {
+    'THE FACE BEHIND THE PIXELS':'الوجه وراء التصميم',
+    'Silver portrait of Karem Ehab':'بورتريه فضي لكريم إيهاب',
+    'Interactive silver portrait of Karem Ehab that follows your pointer and blinks':'بورتريه فضي تفاعلي لكريم إيهاب يتابع المؤشر ويرمش',
+    'Say hello':'قل مرحباً','Pause motion':'إيقاف الحركة','Resume motion':'تشغيل الحركة',
+    'KAREM EHAB':'كريم إيهاب','UI/UX · ALEXANDRIA':'تصميم الواجهات والتجربة · الإسكندرية',
+    'Tell me your idea':'احكي لي فكرتك',
     'System':'النظام', 'Light':'فاتح', 'Dark':'داكن', 'Color theme':'مظهر الموقع',
     'Work':'أعمالي','About':'عني','Play':'العب','Let’s talk':'لنتحدث',
     'Karem Ehab home':'كريم إيهاب — الرئيسية','Main navigation':'القائمة الرئيسية',
