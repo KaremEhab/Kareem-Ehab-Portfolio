@@ -1,52 +1,57 @@
-# Design QA — Selected “Ideas in motion” Hero
+# Design QA — Hero crop, depth text, and orbit interaction
 
-- Source visual truth: `/workspace/scratch/a61597f15bea/upload/01-image.png`
-- Browser-rendered implementation: `/workspace/scratch/a61597f15bea/qa/implementation-hero-final.jpeg`
-- Combined comparison: `/workspace/scratch/a61597f15bea/qa/hero-comparison-final.png`
-- Production URL: `https://karem-ehab-design.kareemehab.chatgpt.site`
-- State: English, light hero canvas, page at top, fully loaded
-- Browser viewport: 1200 × 750 CSS px, device scale factor 1
-- Source pixels: 1488 × 1057; normalized by cropping the top 1488 × 930 hero region and resizing to 1200 × 750
-- Implementation pixels: 1200 × 750
+- Source visual truth: `C:\Users\karem\AppData\Local\Temp\codex-clipboard-c711f1d1-6263-43b6-bca6-61c8c0c72463.png` (desktop, 1927 × 1521 px) and `C:\Users\karem\AppData\Local\Temp\codex-clipboard-a2dc2396-e929-4825-a344-a47760f4d79f.png` (mobile reference)
+- Browser-rendered implementation: Codex in-app Browser capture, local preview `http://localhost:4173/` (the browser API did not expose a filesystem path for the capture)
+- Desktop viewport: 1280 × 720 CSS px at device pixel ratio 1.5
+- Mobile viewport: 393 × 852 CSS px
+- State: English, dark theme, page at top, hero assets fully loaded
 
-## Full-view comparison evidence
+## Findings
 
-The final side-by-side comparison preserves the selected concept’s main composition: logo-only header, centered navigation, cream gallery canvas, oversized “Ideas in motion.” typography, cobalt orbital sculpture, lime/coral satellites, thin orbit lines, centered supporting line, and dark CTA. The sculpture overlaps “Ideas” while the opening “m” of “motion” turns white over the cobalt surface, matching the reference depth treatment.
+- No actionable P0, P1, or P2 issues remain in the requested surfaces.
+- The desktop sculpture is fully contained by the hero stage: measured artwork bounds are y=85.8–822.4 within stage bounds y=57.3–850.9.
+- The back layer of “motion.” now resolves to the same theme-aware foreground color as “Ideas” (`rgb(240, 241, 247)` in the verified dark theme), while the front duplicate remains an outline over the sculpture.
+- All four orbit balls expose interactive controls and run their pop animation. Mouse click and keyboard Enter activation were both verified; touch/coarse-pointer bursts remain enabled.
 
 ## Required fidelity surfaces
 
-- Fonts and typography: Space Grotesk matches the reference’s geometric grotesk character. Display scale, tight tracking, line placement, and black/white/lime hierarchy are visually aligned.
-- Spacing and layout rhythm: Header offsets, sculpture scale, title positions, centered caption, and CTA rhythm match the normalized reference. The live header remains compatible with its existing docked state.
-- Colors and tokens: Warm cream, near-black, cobalt, electric lime, and coral match the target direction. Contrast remains strong on the fixed hero canvas.
-- Image quality and asset fidelity: The hero uses a dedicated transparent 1488 × 1057 rendered PNG with clean alpha, sharp highlights, and no placeholder or CSS-drawn substitute.
-- Copy and content: “Ideas in motion.”, “UI/UX design with clarity, rhythm, and joy.”, and “Explore my work” match the selected design. Arabic equivalents remain available through the site locale control.
+- Fonts and typography: Existing Space Grotesk sizing, weight, tracking, and responsive placements are preserved. Only the requested `motion.` back-fill color changed.
+- Spacing and layout rhythm: Desktop sculpture scale and vertical placement were adjusted so its transparent artwork no longer intersects the stage crop. The 393 × 852 mobile composition remains balanced and unchanged in scale.
+- Colors and visual tokens: `motion.` now inherits `--ink`, matching `Ideas` in both light and dark themes. The front outline remains white for the depth effect.
+- Image quality and asset fidelity: The original transparent cobalt PNG is retained without resampling or replacement.
+- Copy and content: No copy changed.
 
-## Focused-region comparison evidence
+## Focused-region evidence
 
-The title/model overlap was reviewed separately at the left “Ideas” edge and the foreground “motion” word. The final implementation keeps “Ideas” behind the sculpture, “in” above it, and the white first letter of “motion” over the blue surface before returning to black type and a lime period.
+- Desktop top edge: the blue sculpture now has visible breathing room above its highlight instead of a flat clipped edge.
+- Title/model overlap: `motion.` is filled on the back layer and outlined on the foreground layer, preserving the intended dimensional overlap.
+- Orbit controls: clicking a visible ball produced one active `.is-popping` state; keyboard activation produced the same result. Four named orbit controls appear in the accessibility tree.
 
 ## Comparison history
 
 ### Pass 1 — blocked
 
-- P2: The sculpture sat too low and left, reducing the whitespace around the supporting sentence.
-- P2: The foreground “motion” word lacked the selected reference’s white leading letter over the cobalt form.
-- Fixes: shifted the artwork upward/right, moved the display words upward, refined the motion word alignment, and added the white first-letter depth treatment.
+- P2: Desktop artwork exceeded the hero stage and was clipped at wide widths.
+- P2: The `motion.` back layer used a hard-coded dark value, so it disappeared against the dark canvas instead of matching `Ideas`.
+- P2: Orbit balls were visually animated but not independently interactive.
 
 ### Pass 2 — passed
 
-- Post-fix evidence: `/workspace/scratch/a61597f15bea/qa/hero-comparison-final.png`
-- No actionable P0, P1, or P2 differences remain.
+- Reduced the wide-screen artwork width to `min(82%, 1180px)` and centered it vertically at 50%.
+- Replaced the hard-coded motion fill with the theme token `var(--ink)`.
+- Added pointer and keyboard activation, a ball compression/rebound animation, the existing joy burst/ripple language, larger invisible hit targets, focus styling, and accessible labels.
+- Rechecked desktop and mobile captures after the fixes. Browser console reported no warnings or errors.
 
 ## Interaction verification
 
-- Scroll-driven artwork movement and the hero-to-work transition were tested in the cloud browser.
-- “Explore my work” updates the URL to `#work` and lands the selected-work section beneath the fixed header.
-- The fixed menu opens and closes successfully.
-- Browser logs showed no site-origin errors; only unrelated browser-extension metadata errors were present.
+- Orbit ball mouse click: passed.
+- Orbit ball keyboard Enter activation: passed.
+- Mobile 393 × 852 responsive layout: passed.
+- Browser console warnings/errors: none.
+- Production build validation: passed.
 
 ## Follow-up polish
 
-- P3: No separate mobile reference was supplied. The mobile composition uses purpose-built responsive rules, but a future mobile-specific art-direction pass could tune the crop further on very narrow screens.
+- No blocking follow-up items.
 
 final result: passed

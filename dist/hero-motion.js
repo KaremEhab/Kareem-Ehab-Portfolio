@@ -23,7 +23,7 @@
     return node;
   };
   const layers = ['back', 'front'].map(side => {
-    const svg = make('svg', {viewBox:'0 0 1488 1057', class:`hero-ring-layer hero-ring-${side}`, 'aria-hidden':'true'});
+    const svg = make('svg', {viewBox:'0 0 1488 1057', class:`hero-ring-layer hero-ring-${side}`});
     const defs = make('defs', {});
     const colors = [['#f6ffbb','#c8ed00','#617900'],['#ffe0d2','#ff7956','#a82c22'],['#e6e9f2','#30343e','#030407']];
     colors.forEach((stops, index) => {
@@ -50,11 +50,55 @@
       layer.append(make('path',{d:points.map((p,i)=>`${i?'L':'M'}${p.join(',')}`).join(' '),fill:'none',stroke:'#626572','stroke-width':2.4,'stroke-linecap':'round'}));
     });
   });
-  const planets=orbits.map(o => {
-    const g=make('g',{});
-    const ball=make('circle',{r:o.radius,fill:`url(#planet-front-${o.color})`});
-    g.append(ball,make('ellipse',{cx:-o.radius*.28,cy:-o.radius*.35,rx:o.radius*.18,ry:o.radius*.11,fill:'white',opacity:'.7',transform:'rotate(-25)'}));
+  const planets=orbits.map((o,index) => {
+    const g=make('g',{class:'hero-orbit-planet',role:'button',tabindex:'0','aria-label':`Pop orbiting ball ${index+1}`});
+    const hit=make('circle',{r:Math.max(o.radius+14,28),fill:'transparent'});
+    const ball=make('circle',{class:'hero-planet-body',r:o.radius,fill:`url(#planet-front-${o.color})`});
+    const shine=make('ellipse',{class:'hero-planet-shine',cx:-o.radius*.28,cy:-o.radius*.35,rx:o.radius*.18,ry:o.radius*.11,fill:'white',opacity:'.7',transform:'rotate(-25)'});
+    g.append(hit,ball,shine);
     layers[1].append(g); return {g,ball};
+  });
+  const joyColors=['#2b39ef','#d5f55b','#ff835f','#a987ef'];
+  const joyShapes=['✦','●','◇','✧'];
+  function emitJoyBurst(x,y) {
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    for(let i=0;i<16;i++){
+      const angle=Math.PI*2*i/16+Math.random()*.18;
+      const distance=48+Math.random()*46;
+      const node=document.createElement('span');
+      node.className='joy-particle joy-burst';
+      node.textContent=joyShapes[i%joyShapes.length];
+      node.style.left=`${x}px`;node.style.top=`${y}px`;node.style.color=joyColors[i%joyColors.length];
+      node.style.setProperty('--joy-x',`${Math.cos(angle)*distance}px`);
+      node.style.setProperty('--joy-y',`${Math.sin(angle)*distance}px`);
+      node.style.setProperty('--joy-rotate',`${90+Math.random()*260}deg`);
+      node.style.setProperty('--joy-scale',`${.8+Math.random()*.7}`);
+      document.body.append(node);setTimeout(()=>node.remove(),900);
+    }
+    const ripple=document.createElement('span');
+    ripple.className='joy-click-ring';ripple.style.left=`${x}px`;ripple.style.top=`${y}px`;
+    document.body.append(ripple);setTimeout(()=>ripple.remove(),650);
+  }
+  function popPlanet(planet,x,y,needsBurst) {
+    planet.g.classList.remove('is-popping');
+    requestAnimationFrame(()=>planet.g.classList.add('is-popping'));
+    setTimeout(()=>planet.g.classList.remove('is-popping'),520);
+    if(needsBurst)emitJoyBurst(x,y);
+  }
+  planets.forEach(planet=>{
+    let pointerType='keyboard';
+    planet.g.addEventListener('pointerdown',event=>{pointerType=event.pointerType||'mouse';});
+    planet.g.addEventListener('click',event=>{
+      const rect=planet.g.getBoundingClientRect();
+      popPlanet(planet,event.clientX||rect.left+rect.width/2,event.clientY||rect.top+rect.height/2,pointerType!=='mouse');
+      pointerType='keyboard';
+    });
+    planet.g.addEventListener('keydown',event=>{
+      if(event.key!=='Enter'&&event.key!==' ')return;
+      event.preventDefault();
+      const rect=planet.g.getBoundingClientRect();
+      popPlanet(planet,rect.left+rect.width/2,rect.top+rect.height/2,true);
+    });
   });
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   let paused=reduced.matches, visible=true, frame=0, last=0, elapsed=0;
