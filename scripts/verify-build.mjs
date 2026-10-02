@@ -4,6 +4,8 @@ import { resolve } from "node:path";
 const outputDirectory = resolve("dist");
 const requiredFiles = [
   "index.html",
+  "about.html",
+  "about-page.js",
   "style.css",
   "app.js",
   "interactions.js",

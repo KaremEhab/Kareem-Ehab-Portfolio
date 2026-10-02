@@ -34,7 +34,7 @@
         });
       });
     }, {rootMargin:'-20% 0px -55% 0px', threshold:0});
-    ['home','work','about','play','contact'].forEach(id => activeSections.observe(document.getElementById(id)));
+    ['home','work','ui-pages','play','contact'].map(id => document.getElementById(id)).filter(Boolean).forEach(section => activeSections.observe(section));
   }
   const header = document.querySelector('#siteHeader');
   const visual = document.querySelector('#contactVisual');

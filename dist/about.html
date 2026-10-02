@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f5f3">
+  <meta name="color-scheme" content="light dark">
+  <script>try{const t=localStorage.getItem("karem-theme")||"system";document.documentElement.dataset.theme=["system","light","dark"].includes(t)?t:"system";const l=localStorage.getItem("karem-locale")==="ar"?"ar":"en";document.documentElement.lang=l;document.documentElement.dir=l==="ar"?"rtl":"ltr"}catch(e){document.documentElement.dataset.theme="system"}</script>
+  <meta name="description" content="About Karem Ehab, a digital product and UI/UX designer based in Alexandria, Egypt. Turning complex ideas into clear, usable, and memorable experiences.">
+  <title>About — Karem Ehab</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=spatino-1">
+</head>
+<body class="spatino-body">
+  <header class="spatino-header-wrap" id="siteHeader">
+    <div class="spatino-header">
+      <div class="spatino-brand-col">
+        <a class="spatino-brand-title" href="./" aria-label="Karem Ehab home">Design by Karem.</a>
+        <span class="spatino-brand-sub">— Alexandria, EG</span>
+      </div>
+      <nav class="spatino-nav" aria-label="Main navigation">
+        <a href="./">Home</a>
+        <a href="about.html" class="active" aria-current="page">About</a>
+        <a href="./#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="spatino-header-actions">
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="headerMenu"><span></span><span></span></button>
+        <div class="header-menu header-menu-compact" id="headerMenu" hidden>
+          <div class="menu-row"><label for="themeSelect">Appearance</label><select id="themeSelect" class="theme-select" aria-label="Color theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
+          <div class="menu-row"><span>Language</span><button id="localeToggle" class="utility-button" data-no-translate lang="ar" aria-label="Switch to Arabic">العربية</button></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="spatino-main" id="main-content">
+    <!-- Hero Portrait Section -->
+    <section class="spatino-hero-section">
+      <div class="spatino-container">
+        <div class="spatino-hero-frame">
+          <img src="about-hero-portrait.jpg" alt="Portrait of Karem Ehab in his studio in Alexandria overlooking the sea" width="1920" height="1080" fetchpriority="high" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="spatino-section" aria-labelledby="infoHeading">
+      <div class="spatino-container spatino-grid">
+        <p class="spatino-sticky-label" id="infoHeading">Info</p>
+        <div class="spatino-content spatino-prose">
+          <p>I’m <strong>Karem Ehab</strong>, a digital product and UI/UX designer based in Alexandria, Egypt. Over the years, I have worked across mobile applications, web platforms, and design systems, helping teams transform ambitious, complex ideas into clear, consistent, and engaging user experiences.</p>
+          <p>With an academic foundation in <strong>Management Information Systems (MIS)</strong> from Alexandria University, I naturally look beneath the surface of the interface. I analyze data structures, user motivations, and business requirements before touching pixels, ensuring that every design choice is purposeful and technically viable.</p>
+          <p>My career focuses on hands-on visual craft, component architecture, and rapid prototyping. Whether shaping an intuitive mobile banking flow, crafting a streamlined food pickup tracker, or engineering a high-velocity workspace dashboard, my goal remains consistent: <strong>less friction, more feeling</strong>.</p>
+          <p>Today, I partner with forward-thinking founders, design teams, and startups worldwide to deliver state-of-the-art digital products that feel effortless to use and scalable to build.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section class="spatino-section" aria-labelledby="expHeading">
+      <div class="spatino-container spatino-grid">
+        <p class="spatino-sticky-label" id="expHeading">Work Experience</p>
+        <div class="spatino-content spatino-experience-list">
+          <div class="spatino-exp-item">
+            <div class="spatino-exp-head">
+              <div class="spatino-exp-title">
+                <div class="spatino-exp-icon" aria-hidden="true">KE</div>
+                <div>
+                  <h3 class="spatino-exp-role">Independent Product &amp; UI Designer</h3>
+                  <p class="spatino-exp-org">Freelance, Startups &amp; Studio Partnerships</p>
+                </div>
+              </div>
+              <span class="spatino-exp-date">2024 — Present</span>
+            </div>
+            <p class="spatino-exp-desc">Partnering directly with founders, engineers, and product managers to define product vision, architect interactive prototypes in Figma, and build scalable multi-brand design systems for web and mobile.</p>
+          </div>
+
+          <div class="spatino-exp-item">
+            <div class="spatino-exp-head">
+              <div class="spatino-exp-title">
+                <div class="spatino-exp-icon" aria-hidden="true">UX</div>
+                <div>
+                  <h3 class="spatino-exp-role">Lead UI/UX Designer — Fintech &amp; Lifestyle</h3>
+                  <p class="spatino-exp-org">Product Concepts &amp; Client Projects</p>
+                </div>
+              </div>
+              <span class="spatino-exp-date">2023 — 2024</span>
+            </div>
+            <p class="spatino-exp-desc">Led the end-to-end design of <strong>Morrow</strong> (a calm mobile fintech platform prioritizing balance clarity and 3-tap transfers) and <strong>Gather</strong> (a friction-free food discovery and live pickup experience). Conducted usability reviews and established reusable token libraries.</p>
+          </div>
+
+          <div class="spatino-exp-item">
+            <div class="spatino-exp-head">
+              <div class="spatino-exp-title">
+                <div class="spatino-exp-icon" aria-hidden="true">DS</div>
+                <div>
+                  <h3 class="spatino-exp-role">UI/UX &amp; Design Systems Specialist</h3>
+                  <p class="spatino-exp-org">SaaS &amp; Web Applications</p>
+                </div>
+              </div>
+              <span class="spatino-exp-date">2022 — 2023</span>
+            </div>
+            <p class="spatino-exp-desc">Designed dense productivity interfaces including <strong>Forma</strong>, a web workspace balancing task velocity with a serene desktop canvas. Engineered tokenized Figma components, states, and responsive breakpoints aligned with developer implementation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capabilities Section -->
+    <section class="spatino-section" aria-labelledby="capHeading">
+      <div class="spatino-container spatino-grid">
+        <p class="spatino-sticky-label" id="capHeading">Capabilities</p>
+        <div class="spatino-content spatino-capabilities-grid">
+          <div class="spatino-cap-card">
+            <span class="spatino-cap-num">01</span>
+            <h4>UI/UX &amp; Product Design</h4>
+            <p>User research, user journey mapping, wireframing, high-fidelity UI design, and WCAG accessibility standards.</p>
+          </div>
+          <div class="spatino-cap-card">
+            <span class="spatino-cap-num">02</span>
+            <h4>Design Systems &amp; Tokens</h4>
+            <p>Comprehensive component libraries, auto-layout architecture, design tokens, variable modes, and team guidelines.</p>
+          </div>
+          <div class="spatino-cap-card">
+            <span class="spatino-cap-num">03</span>
+            <h4>Interaction &amp; Prototyping</h4>
+            <p>High-fidelity clickable Figma prototypes, micro-interaction design, transitions, and user testing verification.</p>
+          </div>
+          <div class="spatino-cap-card">
+            <span class="spatino-cap-num">04</span>
+            <h4>Front-End Collaboration</h4>
+            <p>Pragmatic engineering handoff with Flutter, HTML5, CSS, design tokens, and browser-ready specs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools & Stack Section -->
+    <section class="spatino-section" aria-labelledby="toolsHeading">
+      <div class="spatino-container spatino-grid">
+        <p class="spatino-sticky-label" id="toolsHeading">Tools &amp; Stack</p>
+        <div class="spatino-content spatino-tools-wrap">
+          <span class="spatino-tool-pill">Figma</span>
+          <span class="spatino-tool-pill">FigJam</span>
+          <span class="spatino-tool-pill">Adobe Illustrator</span>
+          <span class="spatino-tool-pill">Adobe Photoshop</span>
+          <span class="spatino-tool-pill">Blender 3D</span>
+          <span class="spatino-tool-pill">Flutter UI</span>
+          <span class="spatino-tool-pill">HTML5 &amp; CSS3</span>
+          <span class="spatino-tool-pill">Design Tokens</span>
+          <span class="spatino-tool-pill">Notion</span>
+          <span class="spatino-tool-pill">Principle</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="spatino-section" aria-labelledby="eduHeading">
+      <div class="spatino-container spatino-grid">
+        <p class="spatino-sticky-label" id="eduHeading">Education</p>
+        <div class="spatino-content spatino-edu-card">
+          <h4>Alexandria University</h4>
+          <p class="spatino-edu-degree">Bachelor of Business Administration (BBA) — Management Information Systems (MIS)</p>
+          <p class="spatino-edu-note">Comprehensive training in database management, systems analysis, business processes, and human-computer interaction principles.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Arturo Spatino Style Minimalist Footer -->
+  <footer class="spatino-footer" id="contact">
+    <div class="spatino-container">
+      <div class="spatino-footer-content">
+        <h2 class="spatino-footer-title">Connect, collaborate,<br>or just say hello</h2>
+        <div class="spatino-footer-email-row">
+          <a href="mailto:karemehab2323@gmail.com" class="spatino-footer-email">karemehab2323@gmail.com <span>↗</span></a>
+        </div>
+        <div class="spatino-footer-links">
+          <a href="https://wa.me/201112190563" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
+          <a href="mailto:karemehab2323@gmail.com">Email ↗</a>
+          <a href="./#work">View Work</a>
+          <a href="./">Home</a>
+        </div>
+        <div class="spatino-footer-bottom">
+          <p>© <span id="year">2026</span> Karem Ehab. All rights reserved.</p>
+          <span>Crafted with clarity &amp; curiosity · Alexandria, Egypt</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="preferences.js?v=spatino-1"></script>
+  <script src="about-page.js?v=spatino-1"></script>
+</body>
+</html>
