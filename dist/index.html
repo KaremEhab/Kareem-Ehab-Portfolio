@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=orbit-9">
+  <link rel="stylesheet" href="style.css?v=orbit-10">
   <link rel="stylesheet" href="hero-motion.css?v=7">
 </head>
 <body>
@@ -24,8 +24,7 @@
   <header class="site-header" id="siteHeader">
     <a class="brand" href="#home" aria-label="Karem Ehab home"><span class="brand-logo"><img src="logo.svg" alt="" width="194" height="240"></span></a>
     <nav aria-label="Main navigation">
-      <a href="#work">Work</a>
-      <a href="#ui-pages">UI Pages</a>
+      <a href="#projects">Projects</a>
       <a href="about.html">About</a>
       <a href="#play">Play</a>
     </nav>
@@ -70,70 +69,61 @@
       <div>LESS FRICTION <span class="loop-mark"></span> MORE FEELING <span class="loop-mark"></span> CLEAR THINKING <span class="loop-mark"></span> BOLD IDEAS <span class="loop-mark"></span> LESS FRICTION <span class="loop-mark"></span> MORE FEELING <span class="loop-mark"></span> CLEAR THINKING <span class="loop-mark"></span> BOLD IDEAS <span class="loop-mark"></span></div>
     </div>
 
-    <!-- 01 / SELECTED WORK -->
-    <section class="work section" id="work">
+    <!-- Projects carousel: visual screens open into the full project case study. -->
+    <section class="projects-section" id="projects" aria-labelledby="projectsTitle">
       <div class="section-head">
-        <div>
-          <span class="eyebrow">01 / SELECTED EXPLORATIONS</span>
-          <h2>Selected work.</h2>
-        </div>
+        <span class="eyebrow">01 / SELECTED PROJECTS</span>
+        <p>Scroll to explore. Select a project to bring it into focus.</p>
       </div>
-      <div class="project-grid">
-        <!-- Morrow Project Card -->
-        <button class="project" data-project="morrow" type="button" aria-label="Open Morrow case study">
-          <div class="project-cover finance">
-            <span class="project-cover-badge">FINTECH / MOBILE</span>
-            <img class="project-card-image" src="morrow-case.webp" alt="Morrow fintech mobile app preview showing balance and spending metrics" loading="lazy" decoding="async">
-            <div class="project-cover-overlay"></div>
-            <div class="project-cover-preview-label"><span>View Case Study</span> <b>↗</b></div>
-          </div>
-          <div class="project-meta">
-            <div>
-              <h3>Morrow</h3>
-              <p>Everyday finance, simplified</p>
-            </div>
-            <span class="project-open">+</span>
-          </div>
-        </button>
-
-        <!-- Gather Project Card -->
-        <button class="project" data-project="gather" type="button" aria-label="Open Gather case study">
-          <div class="project-cover food">
-            <span class="project-cover-badge">FOOD &amp; LIFESTYLE / MOBILE</span>
-            <img class="project-card-image" src="gather-case.webp" alt="Gather food pickup app interface preview with gourmet bowls and order tracker" loading="lazy" decoding="async">
-            <div class="project-cover-overlay"></div>
-            <div class="project-cover-preview-label"><span>View Case Study</span> <b>↗</b></div>
-          </div>
-          <div class="project-meta">
-            <div>
-              <h3>Gather</h3>
-              <p>Good food, ready for pickup</p>
-            </div>
-            <span class="project-open">+</span>
-          </div>
-        </button>
-
-        <!-- Forma Project Card -->
-        <button class="project wide" data-project="forma" type="button" aria-label="Open Forma case study">
-          <div class="project-cover dashboard">
-            <span class="project-cover-badge">WORKSPACE / WEB APP</span>
-            <img class="project-card-image" src="forma-case.webp" alt="Forma creative workspace dashboard displayed on desktop monitor and tablet" loading="lazy" decoding="async">
-            <div class="project-cover-overlay"></div>
-            <div class="project-cover-preview-label"><span>View Case Study</span> <b>↗</b></div>
-          </div>
-          <div class="project-meta">
-            <div>
-              <h3>Forma</h3>
-              <p>Room for focused creative work</p>
-            </div>
-            <span class="project-open">+</span>
-          </div>
-        </button>
+      <h2 class="projects-back-title" id="projectsTitle" aria-hidden="true">Morrow</h2>
+      <div class="projects-rail" id="projectsRail" tabindex="0" aria-label="Projects carousel">
+        <article class="project-slide is-active" data-project-slide="morrow" aria-current="true">
+          <button class="project-select" type="button" aria-label="Select Morrow project">
+            <span class="project-slide-index">01</span>
+            <span class="project-slide-type">FINTECH · MOBILE APP</span>
+            <img src="morrow-case.webp" alt="Morrow mobile finance interface screens" width="1536" height="1024" decoding="async">
+            <span class="project-slide-open">View project <b aria-hidden="true">↗</b></span>
+          </button>
+          <h3>Morrow</h3>
+        </article>
+        <article class="project-slide" data-project-slide="gather">
+          <button class="project-select" type="button" aria-label="Select Gather project">
+            <span class="project-slide-index">02</span>
+            <span class="project-slide-type">FOOD TECH · MOBILE APP</span>
+            <img src="gather-case.webp" alt="Gather food discovery and pickup app interface screens" width="1536" height="1024" loading="lazy" decoding="async">
+            <span class="project-slide-open">View project <b aria-hidden="true">↗</b></span>
+          </button>
+          <h3>Gather</h3>
+        </article>
+        <article class="project-slide" data-project-slide="forma">
+          <button class="project-select" type="button" aria-label="Select Forma project">
+            <span class="project-slide-index">03</span>
+            <span class="project-slide-type">WORKSPACE · WEB APP</span>
+            <img src="forma-case.webp" alt="Forma workspace and project planning interface" width="1536" height="1024" loading="lazy" decoding="async">
+            <span class="project-slide-open">View project <b aria-hidden="true">↗</b></span>
+          </button>
+          <h3>Forma</h3>
+        </article>
+      </div>
+      <div class="projects-caption" aria-live="polite" aria-atomic="true">
+        <span class="projects-caption-index">01</span>
+        <p>Everyday finance, simplified with a clear balance, useful insights, and quick actions.</p>
+        <span class="projects-caption-scope">MOBILE APP&nbsp; | &nbsp;UI/UX DESIGN&nbsp; | &nbsp;PROTOTYPE</span>
+      </div>
+      <div class="projects-controls">
+        <button type="button" class="projects-arrow" data-project-step="-1" aria-label="Previous project">←</button>
+        <div class="projects-dots" role="group" aria-label="Choose a project">
+          <button type="button" class="is-active" data-project-goto="0" aria-label="Show Morrow" aria-pressed="true"></button>
+          <button type="button" data-project-goto="1" aria-label="Show Gather" aria-pressed="false"></button>
+          <button type="button" data-project-goto="2" aria-label="Show Forma" aria-pressed="false"></button>
+        </div>
+        <button type="button" class="projects-arrow" data-project-step="1" aria-label="Next project">→</button>
+        <button type="button" class="projects-open-case" data-project="morrow">Open case study <span aria-hidden="true">↗</span></button>
       </div>
     </section>
 
     <!-- 02 / UI DESIGN PAGES (Visual Interface Gallery) -->
-    <section class="ui-showcase" id="ui-pages" aria-labelledby="uiPagesHeading">
+    <section class="ui-showcase" id="legacy-ui-pages" aria-labelledby="uiPagesHeading" hidden>
       <div class="section-head">
         <div>
           <span class="eyebrow">02 / UI DESIGN PAGES</span>
@@ -384,9 +374,9 @@
   <div id="toast" role="status"></div>
   <noscript><style>.site-loader,.asset-loader{display:none}.header-menu[hidden]{display:block!important}.menu-toggle{display:none}</style></noscript>
   <script src="preferences.js?v=orbit-9"></script>
-  <script src="app.js?v=orbit-9"></script>
+  <script src="app.js?v=orbit-10"></script>
   <script src="interactions.js?v=orbit-4"></script>
-  <script src="navigation.js?v=orbit-7"></script>
+  <script src="navigation.js?v=orbit-8"></script>
   <script src="cursor.js?v=orbit-4"></script>
   <script src="hero-motion.js?v=6"></script>
 </body>

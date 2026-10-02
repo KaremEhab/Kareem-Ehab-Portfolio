@@ -34,20 +34,16 @@
         });
       });
     }, {rootMargin:'-20% 0px -55% 0px', threshold:0});
-    ['home','work','ui-pages','play','contact'].map(id => document.getElementById(id)).filter(Boolean).forEach(section => activeSections.observe(section));
+    ['home','projects','play','contact'].map(id => document.getElementById(id)).filter(Boolean).forEach(section => activeSections.observe(section));
   }
-  const header = document.querySelector('#siteHeader');
   const visual = document.querySelector('#contactVisual');
   const layers = [...document.querySelectorAll('.scene-layer')];
   const briefButton = document.querySelector('#contactButton');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let visible = !('IntersectionObserver' in window);
-  let docked = false;
   let frame = 0;
   function renderScroll() {
     frame = 0;
-    const nextDocked = docked ? window.scrollY > 24 : window.scrollY > 64;
-    if (nextDocked !== docked) { docked = nextDocked; header.classList.toggle('is-docked', docked); }
     if (visible && !reduced.matches && !document.hidden) {
       const rect = visual.getBoundingClientRect();
       // Finish at the fully revealed scene, including at the end of the page.

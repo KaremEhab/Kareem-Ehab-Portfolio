@@ -474,38 +474,90 @@ document.querySelectorAll('dialog').forEach(d => {
   });
 });
 
-// Homepage UI Pages Gallery Interaction
-const uiGalleryFilters = document.querySelectorAll('.ui-filter-pill');
-const uiGalleryCards = document.querySelectorAll('.ui-showcase-card');
-
-uiGalleryFilters.forEach(pill => {
-  pill.addEventListener('click', () => {
-    uiGalleryFilters.forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-    const filter = pill.dataset.filter;
-    uiGalleryCards.forEach(card => {
-      if (filter === 'all' || card.dataset.projectRef === filter) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
+// Centered projects carousel: snap scrolling, wheel navigation and selection.
+(() => {
+  const rail = document.querySelector('#projectsRail');
+  if (!rail) return;
+  const slides = [...rail.querySelectorAll('[data-project-slide]')];
+  const dots = [...document.querySelectorAll('[data-project-goto]')];
+  const previous = document.querySelector('[data-project-step="-1"]');
+  const next = document.querySelector('[data-project-step="1"]');
+  const title = document.querySelector('#projectsTitle');
+  const captionIndex = document.querySelector('.projects-caption-index');
+  const caption = document.querySelector('.projects-caption p');
+  const scope = document.querySelector('.projects-caption-scope');
+  const openCase = document.querySelector('.projects-open-case');
+  const details = {
+    morrow: ['Everyday finance, simplified with a clear balance, useful insights, and quick actions.', 'MOBILE APP  |  UI/UX DESIGN  |  PROTOTYPE'],
+    gather: ['Good food, ready for pickup through a warm, connected order journey.', 'MOBILE APP  |  PRODUCT DESIGN  |  PROTOTYPE'],
+    forma: ['A focused workspace that makes complex projects feel easier to navigate.', 'WEB APP  |  UI/UX DESIGN  |  DESIGN SYSTEM']
+  };
+  let activeIndex = 0;
+  let scrollFrame = 0;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const projectKeys = slides.map(slide => slide.dataset.projectSlide);
+  function centerSlide(index, smooth = true) {
+    const slide = slides[(index + slides.length) % slides.length];
+    const left = slide.offsetLeft - (rail.clientWidth - slide.clientWidth) / 2;
+    rail.scrollTo({left, behavior:smooth && !reduced.matches ? 'smooth' : 'instant'});
+  }
+  function select(index) {
+    activeIndex = index;
+    slides.forEach((slide, i) => {
+      const distance = Math.abs(i - index);
+      slide.classList.toggle('is-active', i === index);
+      slide.classList.toggle('is-near', distance === 1);
+      slide.classList.toggle('is-far', distance > 1);
+      slide.setAttribute('aria-current', i === index ? 'true' : 'false');
+      slide.style.setProperty('--project-distance', String(distance));
+      slide.style.setProperty('--project-near-gap', `${distance === 1 ? 34 : 0}px`);
     });
+    const key = projectKeys[index];
+    title.textContent = slides[index].querySelector('h3').textContent;
+    captionIndex.textContent = `0${index + 1}`;
+    caption.textContent = details[key][0];
+    scope.textContent = details[key][1];
+    openCase.dataset.project = key;
+    openCase.setAttribute('aria-label', `Open ${slides[index].querySelector('h3').textContent} case study`);
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === index);
+      dot.setAttribute('aria-pressed', String(i === index));
+    });
+  }
+  function nearestSlide() {
+    const center = rail.getBoundingClientRect().left + rail.clientWidth / 2;
+    let nearest = 0, delta = Infinity;
+    slides.forEach((slide, i) => {
+      const box = slide.getBoundingClientRect();
+      const distance = Math.abs(box.left + box.width / 2 - center);
+      if (distance < delta) { delta = distance; nearest = i; }
+    });
+    if (nearest !== activeIndex) select(nearest);
+  }
+  rail.addEventListener('scroll', () => {
+    if (scrollFrame) return;
+    scrollFrame = requestAnimationFrame(() => { scrollFrame = 0; nearestSlide(); });
+  }, {passive:true});
+  slides.forEach((slide, i) => slide.querySelector('.project-select').addEventListener('click', () => {
+    if (i === activeIndex) openCase.click();
+    else centerSlide(i);
+  }));
+  dots.forEach((dot, i) => dot.addEventListener('click', () => centerSlide(i)));
+  previous.addEventListener('click', () => centerSlide(activeIndex - 1));
+  next.addEventListener('click', () => centerSlide(activeIndex + 1));
+  rail.addEventListener('wheel', event => {
+    if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+    event.preventDefault();
+    rail.scrollBy({left:event.deltaY, behavior:'smooth'});
+  }, {passive:false});
+  rail.addEventListener('keydown', event => {
+    if (event.key === 'ArrowRight') { event.preventDefault(); centerSlide(activeIndex + 1); }
+    if (event.key === 'ArrowLeft') { event.preventDefault(); centerSlide(activeIndex - 1); }
   });
-});
-
-// Click on home UI gallery card zoom trigger
-document.querySelectorAll('.ui-showcase-zoom').forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.stopPropagation();
-    const card = btn.closest('.ui-showcase-card');
-    openScreenZoom(
-      card.dataset.screenImg,
-      card.dataset.screenTitle,
-      card.dataset.screenDesc,
-      card.dataset.screenTag
-    );
-  });
-});
+  select(0);
+  requestAnimationFrame(() => centerSlide(0, false));
+  window.addEventListener('resize', () => centerSlide(activeIndex, false), {passive:true});
+})();
 
 // Contact brief form
 document.querySelector('#contactButton')?.addEventListener('click', () => {
