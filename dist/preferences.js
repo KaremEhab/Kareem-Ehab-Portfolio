@@ -6,12 +6,6 @@
   const systemTheme = matchMedia('(prefers-color-scheme: dark)');
   let locale = root.lang === 'ar' ? 'ar' : 'en';
   const translations = {
-    'THE FACE BEHIND THE PIXELS':'الوجه وراء التصميم',
-    'Silver portrait of Karem Ehab':'بورتريه فضي لكريم إيهاب',
-    'Interactive silver portrait of Karem Ehab that follows your pointer and blinks':'بورتريه فضي تفاعلي لكريم إيهاب يتابع المؤشر ويرمش',
-    'Say hello':'قل مرحباً','Pause motion':'إيقاف الحركة','Resume motion':'تشغيل الحركة',
-    'KAREM EHAB':'كريم إيهاب','UI/UX · ALEXANDRIA':'تصميم الواجهات والتجربة · الإسكندرية',
-    'Tell me your idea':'احكي لي فكرتك',
     'System':'النظام', 'Light':'فاتح', 'Dark':'داكن', 'Color theme':'مظهر الموقع',
     'Work':'أعمالي','About':'عني','Play':'العب','Let’s talk':'لنتحدث',
     'Karem Ehab home':'كريم إيهاب — الرئيسية','Main navigation':'القائمة الرئيسية',
@@ -87,10 +81,6 @@
     'Illustrated Mediterranean bay with a seaside city, distant hills, and coastal greenery':'رسم لخليج متوسطي ومدينة ساحلية وتلال بعيدة ونباتات خضراء'
   });
   Object.assign(translations, {
-    'Project type':'نوع المشروع','Choose a project type':'اختر نوع المشروع','App':'تطبيق','Website':'موقع إلكتروني',
-    'Send by email':'أرسل بالبريد الإلكتروني','Send on WhatsApp':'أرسل عبر واتساب'
-  });
-  Object.assign(translations, {
     'Score':'النتيجة','Best':'الأفضل','Restart game':'إعادة اللعبة','points':'نقاط','High score:':'أعلى نتيجة:','New game':'لعبة جديدة','lives':'فرص',
     'Find six pairs. +100 per match, −10 per miss.':'اعثر على ستة أزواج. +١٠٠ للتطابق، −١٠ للخطأ.',
     'Find the lighter tile. +100 points, streak bonuses, 3 lives.':'اعثر على المربع الأفتح. +١٠٠ نقطة ومكافآت للتتابع، و٣ فرص.',
@@ -113,7 +103,7 @@
     'Skills':'المهارات','Design':'التصميم','Tools':'الأدوات','Build':'التنفيذ',
     'Product Design':'تصميم المنتجات','Adobe Creative Suite':'حزمة أدوبي الإبداعية','Front-end collaboration':'التعاون مع مطوري الواجهات',
     'Blender':'بلندر','Alexandria, Egypt':'الإسكندرية، مصر',
-    'Year':'السنة','Role':'الدور','Platform':'المنصة','Scope':'النطاق','Product design':'تصميم المنتج','Mobile':'الهاتف','Responsive web':'ويب متجاوب',
+    'Role':'الدور','Platform':'المنصة','Scope':'النطاق','Product design':'تصميم المنتج','Mobile':'الهاتف','Responsive web':'ويب متجاوب',
     'Fintech concept':'تصور تقنية مالية','Food pickup concept':'تصور طلب واستلام الطعام','Workspace concept':'تصور مساحة عمل','UI/UX design':'تصميم الواجهات والتجربة',
     'Keep exploring':'واصل الاستكشاف','01 / CHALLENGE':'٠١ / التحدي','02 / APPROACH':'٠٢ / الأسلوب','03 / DESIGN DECISIONS':'٠٣ / قرارات التصميم','04 / OUTCOME':'٠٤ / النتيجة',
     'A calmer way to understand everyday money.':'طريقة أهدأ لفهم أموالك اليومية.',
@@ -206,6 +196,9 @@
     'Ideas in motion.':'أفكار في حركة.','Ideas':'أفكار','in':'في','motion':'حركة','motion.':'حركة.',
     'Thoughtful design. Playful by nature.':'تصميم مدروس. بروح مرحة.',
     'Discover my work':'اكتشف أعمالي',
+    'Contact':'تواصل',
+    'Email my brief':'أرسل فكرتي بالبريد',
+    'Opens your email app with your brief ready to send.':'يفتح تطبيق البريد وفكرتك جاهزة للإرسال.',
     'A new product, a better experience, or something unexpected. Tell me what you have in mind.':'منتج جديد، تجربة أفضل، أو فكرة مختلفة. احكي لي ما يدور في بالك.',
     'Go to project brief':'انتقل إلى تفاصيل المشروع',
     'UI/UX design with clarity, rhythm, and joy.':'تصميم UI/UX بوضوح، وإيقاع، ولمسة بهجة.',
@@ -278,10 +271,6 @@
     root.dataset.effectiveTheme = preference === 'system' ? (systemTheme.matches ? 'dark' : 'light') : preference;
     themeControl.value = preference;
     document.querySelector('meta[name="theme-color"]').content = root.dataset.effectiveTheme === 'dark' ? '#101218' : '#f5f5f3';
-    document.querySelectorAll('[data-light-src][data-dark-src]').forEach(image => {
-      const nextSource = root.dataset.effectiveTheme === 'dark' ? image.dataset.darkSrc : image.dataset.lightSrc;
-      if (image.getAttribute('src') !== nextSource) image.setAttribute('src', nextSource);
-    });
   }
   themeControl.addEventListener('change', () => {
     root.dataset.theme = themeControl.value;

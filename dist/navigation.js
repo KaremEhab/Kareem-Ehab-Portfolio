@@ -19,7 +19,6 @@
   document.addEventListener('focusin', event => {
     if (!menu.hidden && !document.querySelector('#siteHeader').contains(event.target)) setMenu(false);
   });
-  document.querySelector('.menu-contact')?.addEventListener('click', () => setMenu(false));
   document.querySelectorAll('.site-header nav a,.site-header .brand').forEach(link => link.addEventListener('click', () => setMenu(false)));
   const headerLinks = [...document.querySelectorAll('.site-header nav a')];
   if ('IntersectionObserver' in window) {
@@ -34,7 +33,7 @@
         });
       });
     }, {rootMargin:'-20% 0px -55% 0px', threshold:0});
-    ['home','projects','play','contact'].map(id => document.getElementById(id)).filter(Boolean).forEach(section => activeSections.observe(section));
+    ['home','work','about','play','contact'].forEach(id => activeSections.observe(document.getElementById(id)));
   }
   const visual = document.querySelector('#contactVisual');
   const layers = [...document.querySelectorAll('.scene-layer')];
