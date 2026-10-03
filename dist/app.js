@@ -474,171 +474,170 @@ document.querySelectorAll('dialog').forEach(d => {
   });
 });
 
-// Liquid projects carousel: every visible tile is a real, selectable project.
+// Scroll-driven project orbit, matched to the supplied motion reference.
 (() => {
-  const rail = document.querySelector('#projectsRail');
-  if (!rail) return;
-  const section = rail.closest('.projects-section');
-  const slides = [...rail.querySelectorAll('[data-project-slide]')];
-  const title = document.querySelector('#projectsTitle');
-  const captionIndex = document.querySelector('.projects-caption-index');
-  const caption = document.querySelector('.projects-caption p');
-  const scope = document.querySelector('.projects-caption-scope');
-  const details = {
-    gather: ['A warmer way to discover good food, place an order, and pick it up without the wait.', 'Mobile App | Product design | Prototype'],
-    olfah: ['A thoughtful identity-led experience designed to make meaningful connections feel simple.', 'Brand experience | UX/UI design | Prototype'],
-    morrow: ['Everyday finance, simplified with a clear balance, useful insights, and quick actions.', 'Mobile App | UX/UI design | Prototype'],
-    bazooka: ['A bold digital experience shaped around energy, character, and memorable interaction.', 'Website | Art direction | UX/UI design'],
-    forma: ['A calmer workspace for bringing projects, people, and plans together.', 'Web App | UX/UI design | Design system']
-  };
+  const section = document.querySelector('.orbit-project-section');
+  const stage = document.querySelector('#orbitProjectStage');
+  const orbit = document.querySelector('#orbitProjects');
+  if (!section || !stage || !orbit) return;
+
+  const tiles = [...orbit.querySelectorAll('.orbit-project-tile')];
+  const copy = document.querySelector('#orbitProjectCopy');
+  const name = copy.querySelector('.orbit-project-name');
+  const index = copy.querySelector('.orbit-project-index');
+  const type = copy.querySelector('.orbit-project-type');
+  const openButton = copy.querySelector('.orbit-project-open');
+  const progressBar = document.querySelector('.orbit-project-footer b');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const projectKeys = slides.map(slide => slide.dataset.projectSlide);
-  let activeIndex = 2;
-  let scrollFrame = 0;
-  let wheelFrame = 0;
-  let wheelTarget = 0;
-  let snapTimer = 0;
-  let titleToken = 0;
+  const details = {
+    gather: {name:'Gather', index:'01', type:'Mobile App · Product Design'},
+    olfah: {name:'Olfah', index:'02', type:'Brand Experience · UX/UI'},
+    morrow: {name:'Morrow', index:'03', type:'Mobile App · UX/UI Design'},
+    bazooka: {name:'Bazooka', index:'04', type:'Website · Art Direction'},
+    forma: {name:'Forma', index:'05', type:'Web App · Design System'}
+  };
+  const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+  const lerp = (from, to, amount) => from + (to - from) * amount;
+  const ease = value => 1 - Math.pow(1 - clamp(value), 3);
+  let activeTile = 4;
+  let frame = 0;
+  let lastProgress = -1;
+  let selectTimer = 0;
+  let copyTimer = 0;
 
-  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
-  const slideLeft = slide => slide.offsetLeft - (rail.clientWidth - slide.clientWidth) / 2;
-
-  function animateTitle(nextTitle) {
-    if (title.textContent === nextTitle) return;
-    const token = ++titleToken;
-    if (reduced.matches) { title.textContent = nextTitle; return; }
-    title.classList.remove('is-entering');
-    title.classList.add('is-fading');
-    window.setTimeout(() => {
-      if (token !== titleToken) return;
-      title.textContent = nextTitle;
-      title.classList.remove('is-fading');
-      title.classList.add('is-entering');
-      window.setTimeout(() => title.classList.remove('is-entering'), 520);
-    }, 180);
+  if ('IntersectionObserver' in window) {
+    const headerContrastObserver = new IntersectionObserver(entries => {
+      document.body.classList.toggle('orbit-projects-in-view', entries[0].isIntersecting);
+    }, {threshold:0});
+    headerContrastObserver.observe(section);
   }
 
-  function updateLiquidGeometry() {
-    const railBox = rail.getBoundingClientRect();
-    const center = railBox.left + railBox.width / 2;
-    slides.forEach(slide => {
-      const box = slide.getBoundingClientRect();
-      const offset = clamp((box.left + box.width / 2 - center) / Math.max(1, railBox.width * .5), -1.35, 1.35);
-      const distance = Math.min(1, Math.abs(offset));
-      slide.style.setProperty('--liquid-y', `${(distance * 22).toFixed(2)}px`);
-      slide.style.setProperty('--liquid-rotate', `${(-offset * 3.6).toFixed(2)}deg`);
-      slide.style.setProperty('--liquid-scale-x', (1 - distance * .035).toFixed(3));
-      slide.style.setProperty('--liquid-scale-y', (1 + distance * .055).toFixed(3));
-      slide.style.setProperty('--liquid-radius', `${(distance * 26).toFixed(1)}px`);
-      slide.style.setProperty('--liquid-glow', (1 - distance * .72).toFixed(3));
-    });
-  }
-
-  function select(index) {
-    activeIndex = index;
-    slides.forEach((slide, i) => {
-      const distance = Math.abs(i - index);
-      const projectName = slide.querySelector('h3').textContent;
-      slide.classList.toggle('is-active', i === index);
-      slide.classList.toggle('is-near', distance === 1);
-      slide.classList.toggle('is-far', distance > 1);
-      slide.setAttribute('aria-current', i === index ? 'true' : 'false');
-      slide.querySelector('.project-select').setAttribute('aria-label', i === index ? `Open ${projectName} project` : `Bring ${projectName} project to the center`);
-    });
-    const key = projectKeys[index];
-    animateTitle(slides[index].querySelector('h3').textContent);
-    captionIndex.textContent = slides[index].dataset.projectNumber;
-    caption.textContent = details[key][0];
-    scope.textContent = details[key][1];
-    section.classList.remove('caption-refresh');
-    void section.offsetWidth;
-    section.classList.add('caption-refresh');
-  }
-
-  function nearestSlide() {
-    const center = rail.getBoundingClientRect().left + rail.clientWidth / 2;
-    let nearest = 0;
-    let delta = Infinity;
-    slides.forEach((slide, i) => {
-      const box = slide.getBoundingClientRect();
-      const distance = Math.abs(box.left + box.width / 2 - center);
-      if (distance < delta) { delta = distance; nearest = i; }
-    });
-    if (nearest !== activeIndex) select(nearest);
-    return nearest;
-  }
-
-  function centerSlide(index, smooth = true) {
-    const normalized = clamp(index, 0, slides.length - 1);
-    const left = clamp(slideLeft(slides[normalized]), 0, rail.scrollWidth - rail.clientWidth);
-    wheelTarget = left;
-    rail.scrollTo({left, behavior:smooth && !reduced.matches ? 'smooth' : 'instant'});
-  }
-
-  function runLiquidWheel() {
-    const difference = wheelTarget - rail.scrollLeft;
-    rail.scrollLeft += difference * .115;
-    updateLiquidGeometry();
-    if (Math.abs(difference) > .45) {
-      wheelFrame = requestAnimationFrame(runLiquidWheel);
-      return;
-    }
-    rail.scrollLeft = wheelTarget;
-    wheelFrame = 0;
-    window.clearTimeout(snapTimer);
-    snapTimer = window.setTimeout(() => centerSlide(nearestSlide()), 90);
-  }
-
-  function showComingSoon(name) {
+  function showComingSoon(projectName) {
     const toast = document.querySelector('#toast');
     if (!toast) return;
-    toast.textContent = `${name} case study is coming soon.`;
+    toast.textContent = `${projectName} case study is coming soon.`;
     toast.classList.add('show');
     window.clearTimeout(toast._projectTimer);
     toast._projectTimer = window.setTimeout(() => toast.classList.remove('show'), 2200);
   }
 
-  rail.addEventListener('scroll', () => {
-    if (scrollFrame) return;
-    scrollFrame = requestAnimationFrame(() => {
-      scrollFrame = 0;
-      updateLiquidGeometry();
-      nearestSlide();
-      if (!wheelFrame) wheelTarget = rail.scrollLeft;
-    });
-  }, {passive:true});
-
-  slides.forEach((slide, i) => slide.querySelector('.project-select').addEventListener('click', () => {
-    if (i !== activeIndex) { centerSlide(i); return; }
-    const key = projectKeys[i];
+  function openActiveProject() {
+    const key = tiles[activeTile].dataset.orbitProject;
     if (studies[key]) openCaseStudy(studies[key]);
-    else showComingSoon(slide.querySelector('h3').textContent);
-  }));
+    else showComingSoon(details[key].name);
+  }
 
-  rail.addEventListener('wheel', event => {
-    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-    if (!delta) return;
-    event.preventDefault();
-    wheelTarget = clamp((wheelFrame ? wheelTarget : rail.scrollLeft) + delta * 1.08, 0, rail.scrollWidth - rail.clientWidth);
-    if (!wheelFrame) wheelFrame = requestAnimationFrame(runLiquidWheel);
-  }, {passive:false});
+  function updateCopy(nextTile) {
+    const key = nextTile.dataset.orbitProject;
+    const project = details[key];
+    copy.classList.add('is-changing');
+    window.clearTimeout(copyTimer);
+    copyTimer = window.setTimeout(() => {
+      name.textContent = project.name;
+      index.textContent = project.index;
+      type.textContent = project.type;
+      copy.classList.remove('is-changing');
+    }, reduced.matches ? 0 : 150);
+  }
 
-  rail.addEventListener('keydown', event => {
-    if (event.key === 'ArrowRight') { event.preventDefault(); centerSlide(activeIndex + 1); }
-    if (event.key === 'ArrowLeft') { event.preventDefault(); centerSlide(activeIndex - 1); }
-    if (event.key === 'Home') { event.preventDefault(); centerSlide(0); }
-    if (event.key === 'End') { event.preventDefault(); centerSlide(slides.length - 1); }
+  function selectTile(nextIndex, openIfSelected = false) {
+    const normalized = (nextIndex + tiles.length) % tiles.length;
+    if (normalized === activeTile && openIfSelected) { openActiveProject(); return; }
+    activeTile = normalized;
+    orbit.classList.remove('is-selecting');
+    void orbit.offsetWidth;
+    orbit.classList.add('is-selecting');
+    window.clearTimeout(selectTimer);
+    selectTimer = window.setTimeout(() => orbit.classList.remove('is-selecting'), 760);
+    tiles.forEach((tile, tileIndex) => {
+      const selected = tileIndex === activeTile;
+      tile.classList.toggle('is-selected', selected);
+      tile.setAttribute('aria-selected', String(selected));
+      tile.setAttribute('aria-label', `${selected ? 'Open' : 'Select'} ${details[tile.dataset.orbitProject].name} project`);
+    });
+    updateCopy(tiles[activeTile]);
+    render(true);
+  }
+
+  function currentProgress() {
+    const max = Math.max(1, section.offsetHeight - innerHeight);
+    return clamp(-section.getBoundingClientRect().top / max);
+  }
+
+  function render(force = false) {
+    frame = 0;
+    const progress = reduced.matches ? .53 : currentProgress();
+    if (!force && Math.abs(progress - lastProgress) < .0002) return;
+    lastProgress = progress;
+
+    const row = ease(progress / .18);
+    const ring = ease((progress - .18) / .28);
+    const rotate = ease((progress - .42) / .28);
+    const focus = ease((progress - .73) / .27);
+    const width = stage.clientWidth;
+    const height = stage.clientHeight;
+    const compact = width < 640;
+    const base = compact ? Math.min(84, width * .22) : Math.min(132, width * .092);
+    const rowGap = compact ? base * .66 : Math.min(100, width / 12.5);
+    const radiusX = compact ? width * .34 : Math.min(width * .235, 350);
+    const radiusY = compact ? Math.min(height * .27, 220) : Math.min(height * .32, 270);
+    const rotation = rotate * Math.PI * 1.05;
+
+    section.style.setProperty('--orbit-progress', progress.toFixed(4));
+    copy.style.setProperty('--copy-ring', ring.toFixed(4));
+    copy.style.setProperty('--copy-focus', focus.toFixed(4));
+    progressBar.style.transform = `scaleX(${progress.toFixed(4)})`;
+
+    tiles.forEach((tile, tileIndex) => {
+      const ratio = tile.classList.contains('shape-wide') ? [1.22,.82] : tile.classList.contains('shape-tall') ? [.86,1.25] : [1,1];
+      const tileWidth = base * ratio[0];
+      const tileHeight = base * ratio[1];
+      const rowX = (tileIndex - activeTile) * rowGap;
+      const rowY = 0;
+      const angle = ((tileIndex - activeTile) / tiles.length) * Math.PI * 2 + Math.PI / 2 + rotation;
+      const ringX = Math.cos(angle) * radiusX;
+      const ringY = Math.sin(angle) * radiusY;
+      let x = lerp(rowX, ringX, ring);
+      let y = lerp(rowY, ringY, ring);
+      let itemWidth = tileWidth;
+      let itemHeight = tileHeight;
+      let opacity = tileIndex === activeTile ? 1 : row;
+      let scale = lerp(.58, 1, row);
+      let itemRotation = lerp(0, Math.cos(angle) * -3.5, ring);
+
+      if (tileIndex === activeTile && focus > 0) {
+        x = lerp(x, 0, focus);
+        y = lerp(y, 0, focus);
+        itemWidth = lerp(tileWidth, width + 2, focus);
+        itemHeight = lerp(tileHeight, height + 2, focus);
+        scale = 1;
+        itemRotation = lerp(itemRotation, 0, focus);
+      } else if (focus > 0) {
+        opacity *= 1 - focus;
+        scale *= 1 - focus * .28;
+      }
+
+      tile.style.width = `${itemWidth.toFixed(2)}px`;
+      tile.style.height = `${itemHeight.toFixed(2)}px`;
+      tile.style.opacity = opacity.toFixed(3);
+      tile.style.zIndex = tileIndex === activeTile ? String(20 + Math.round(focus * 20)) : String(2 + Math.round((ringY + radiusY) / Math.max(1, radiusY)));
+      tile.style.transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) rotate(${itemRotation.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
+      tile.style.borderRadius = `${lerp(1, 0, focus).toFixed(2)}px`;
+    });
+  }
+
+  function requestRender() { if (!frame) frame = requestAnimationFrame(render); }
+  tiles.forEach((tile, tileIndex) => tile.addEventListener('click', () => selectTile(tileIndex, true)));
+  openButton.addEventListener('click', openActiveProject);
+  stage.addEventListener('keydown', event => {
+    if (event.key === 'ArrowRight') { event.preventDefault(); selectTile(activeTile + 1); }
+    if (event.key === 'ArrowLeft') { event.preventDefault(); selectTile(activeTile - 1); }
+    if (event.key === 'Enter') { event.preventDefault(); openActiveProject(); }
   });
-
-  select(activeIndex);
-  requestAnimationFrame(() => {
-    centerSlide(activeIndex, false);
-    updateLiquidGeometry();
-  });
-  window.addEventListener('resize', () => {
-    centerSlide(activeIndex, false);
-    updateLiquidGeometry();
-  }, {passive:true});
+  window.addEventListener('scroll', requestRender, {passive:true});
+  window.addEventListener('resize', () => render(true), {passive:true});
+  reduced.addEventListener('change', () => render(true));
+  render(true);
 })();
 
 // Contact brief form

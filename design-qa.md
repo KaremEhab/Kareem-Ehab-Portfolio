@@ -1,57 +1,64 @@
-# Design QA — Hero crop, depth text, and orbit interaction
+# Projects Orbit Design QA
 
-- Source visual truth: `C:\Users\karem\AppData\Local\Temp\codex-clipboard-c711f1d1-6263-43b6-bca6-61c8c0c72463.png` (desktop, 1927 × 1521 px) and `C:\Users\karem\AppData\Local\Temp\codex-clipboard-a2dc2396-e929-4825-a344-a47760f4d79f.png` (mobile reference)
-- Browser-rendered implementation: Codex in-app Browser capture, local preview `http://localhost:4173/` (the browser API did not expose a filesystem path for the capture)
-- Desktop viewport: 1280 × 720 CSS px at device pixel ratio 1.5
-- Mobile viewport: 393 × 852 CSS px
-- State: English, dark theme, page at top, hero assets fully loaded
+## Evidence
 
-## Findings
+- Source visual truth: `C:\Users\karem\Videos\Screen Recordings\Screen Recording 2026-10-03 130306.mp4`
+- Source dimensions: 1428 × 802 px, 30 fps, 11.57 seconds.
+- Implementation: `http://127.0.0.1:3000/?qa=1#projects`
+- Implementation screenshot: captured from Codex in-app Browser tab `4` during this QA run. The browser backend displayed the PNG evidence but did not expose a filesystem path.
+- Desktop viewport: 1280 × 720 CSS px at the browser's default density.
+- Mobile viewport: 390 × 844 CSS px at the browser's default density.
+- States compared: opening cover, horizontal strip, complete circular orbit, rotated orbit, selected-cover expansion, full-viewport cover, mobile orbit, and dark appearance.
 
-- No actionable P0, P1, or P2 issues remain in the requested surfaces.
-- The desktop sculpture is fully contained by the hero stage: measured artwork bounds are y=85.8–822.4 within stage bounds y=57.3–850.9.
-- The back layer of “motion.” now resolves to the same theme-aware foreground color as “Ideas” (`rgb(240, 241, 247)` in the verified dark theme), while the front duplicate remains an outline over the sculpture.
-- All four orbit balls expose interactive controls and run their pop animation. Mouse click and keyboard Enter activation were both verified; touch/coarse-pointer bursts remain enabled.
+## Full-view comparison evidence
 
-## Required fidelity surfaces
+- The implementation follows the reference sequence: one small centered cover → a horizontal image strip with oversized title → a circular image orbit → orbit rotation → a centered selected cover expanding to the viewport.
+- The original header and the portfolio's existing light/dark tokens intentionally replace the reference video's header and gray-to-mauve background, per the user's explicit direction.
+- Ten real portfolio visuals are used around the orbit; no decorative placeholders replace project content.
+- The central project name, number, discipline, and selected project update together.
 
-- Fonts and typography: Existing Space Grotesk sizing, weight, tracking, and responsive placements are preserved. Only the requested `motion.` back-fill color changed.
-- Spacing and layout rhythm: Desktop sculpture scale and vertical placement were adjusted so its transparent artwork no longer intersects the stage crop. The 393 × 852 mobile composition remains balanced and unchanged in scale.
-- Colors and visual tokens: `motion.` now inherits `--ink`, matching `Ideas` in both light and dark themes. The front outline remains white for the depth effect.
-- Image quality and asset fidelity: The original transparent cobalt PNG is retained without resampling or replacement.
-- Copy and content: No copy changed.
+## Focused region comparison evidence
 
-## Focused-region evidence
-
-- Desktop top edge: the blue sculpture now has visible breathing room above its highlight instead of a flat clipped edge.
-- Title/model overlap: `motion.` is filled on the back layer and outlined on the foreground layer, preserving the intended dimensional overlap.
-- Orbit controls: clicking a visible ball produced one active `.is-popping` state; keyboard activation produced the same result. Four named orbit controls appear in the accessibility tree.
+- Central title lockup: checked at desktop and mobile orbit states for hierarchy, spacing, wrapping, and contrast.
+- Orbit geometry: checked at desktop and mobile for a complete ring, consistent center, no horizontal document overflow, and selected-tile depth.
+- Selected-cover transition: checked at 86% and 100% scroll progress; the cover expands continuously from its orbit position to the viewport.
+- Header: verified as the existing four-link header with its existing menu and appearance behavior.
 
 ## Comparison history
 
-### Pass 1 — blocked
+1. Earlier issue — [P2] the opening cover shifted left after choosing a different project.
+   - Fix: row positions are now calculated relative to the selected tile rather than the collection midpoint.
+   - Post-fix evidence: the opening cover is centered for the active project on desktop and mobile.
+2. Earlier issue — [P2] the reference palette conflicted with the requested portfolio colors.
+   - Fix: removed the gray/mauve color interpolation and bound the section to `--paper`, `--ink`, `--muted`, `--border`, and `--blue`.
+   - Post-fix evidence: light mode resolves to `rgb(245, 245, 243)` / dark mode to `rgb(16, 18, 24)` while preserving the same motion.
+3. Earlier issue — [P2] the section's micro heading competed with the fixed desktop header.
+   - Fix: moved the micro heading below the existing 80 px header; mobile retains a tighter offset below its 54 px header.
+   - Post-fix evidence: header and section labels occupy separate vertical bands.
+4. Earlier issue — [P2] the existing difference-blend header lost contrast on the light project background.
+   - Fix: while the orbit section is visible, the unchanged header structure now uses the portfolio's `--ink` color; its supplied white SVG logo is inverted only in light appearance.
+   - Post-fix evidence: logo, navigation, active underline, and menu control remain visible in both light and dark appearances.
 
-- P2: Desktop artwork exceeded the hero stage and was clipped at wide widths.
-- P2: The `motion.` back layer used a hard-coded dark value, so it disappeared against the dark canvas instead of matching `Ideas`.
-- P2: Orbit balls were visually animated but not independently interactive.
+## Required fidelity surfaces
 
-### Pass 2 — passed
+- Fonts and typography: existing Inter, DM Sans, and Space Mono families retained; uppercase lockup, compressed line-height, and small monospaced labels match the reference's hierarchy.
+- Spacing and layout rhythm: pinned 520svh desktop / 440svh mobile sequence, centered opening cover, horizontal strip, elliptical orbit, and full-screen final cover verified.
+- Colors and visual tokens: deliberate product-specific adaptation using the existing portfolio tokens; light and dark appearances both verified.
+- Image quality and asset fidelity: only supplied portfolio raster and SVG assets are used. Images use cover/contain behavior appropriate to screenshots and logo cards, with no generated substitutes.
+- Copy and content: project names, numbering, disciplines, labels, and actions use the portfolio's real project content.
 
-- Reduced the wide-screen artwork width to `min(82%, 1180px)` and centered it vertically at 50%.
-- Replaced the hard-coded motion fill with the theme token `var(--ink)`.
-- Added pointer and keyboard activation, a ball compression/rebound animation, the existing joy burst/ripple language, larger invisible hit targets, focus styling, and accessible labels.
-- Rechecked desktop and mobile captures after the fixes. Browser console reported no warnings or errors.
+## Findings
 
-## Interaction verification
-
-- Orbit ball mouse click: passed.
-- Orbit ball keyboard Enter activation: passed.
-- Mobile 393 × 852 responsive layout: passed.
-- Browser console warnings/errors: none.
-- Production build validation: passed.
+- No remaining P0, P1, or P2 fidelity issues.
 
 ## Follow-up polish
 
-- No blocking follow-up items.
+- [P3] Additional project-specific hero images can replace repeated supporting screens when new case-study artwork becomes available.
+
+## Verification
+
+- Primary interactions tested: scroll-driven sequence, project selection, title update, keyboard selection support, case-study opening, appearance switching, and menu/header persistence.
+- Console errors: none.
+- Production build verification: passed.
 
 final result: passed
