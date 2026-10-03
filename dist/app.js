@@ -474,89 +474,171 @@ document.querySelectorAll('dialog').forEach(d => {
   });
 });
 
-// Centered projects carousel: snap scrolling, wheel navigation and selection.
+// Liquid projects carousel: every visible tile is a real, selectable project.
 (() => {
   const rail = document.querySelector('#projectsRail');
   if (!rail) return;
+  const section = rail.closest('.projects-section');
   const slides = [...rail.querySelectorAll('[data-project-slide]')];
-  const dots = [...document.querySelectorAll('[data-project-goto]')];
-  const previous = document.querySelector('[data-project-step="-1"]');
-  const next = document.querySelector('[data-project-step="1"]');
   const title = document.querySelector('#projectsTitle');
   const captionIndex = document.querySelector('.projects-caption-index');
   const caption = document.querySelector('.projects-caption p');
   const scope = document.querySelector('.projects-caption-scope');
-  const openCase = document.querySelector('.projects-open-case');
   const details = {
-    morrow: ['Everyday finance, simplified with a clear balance, useful insights, and quick actions.', 'MOBILE APP  |  UI/UX DESIGN  |  PROTOTYPE'],
-    gather: ['Good food, ready for pickup through a warm, connected order journey.', 'MOBILE APP  |  PRODUCT DESIGN  |  PROTOTYPE'],
-    forma: ['A focused workspace that makes complex projects feel easier to navigate.', 'WEB APP  |  UI/UX DESIGN  |  DESIGN SYSTEM']
+    gather: ['A warmer way to discover good food, place an order, and pick it up without the wait.', 'Mobile App | Product design | Prototype'],
+    olfah: ['A thoughtful identity-led experience designed to make meaningful connections feel simple.', 'Brand experience | UX/UI design | Prototype'],
+    morrow: ['Everyday finance, simplified with a clear balance, useful insights, and quick actions.', 'Mobile App | UX/UI design | Prototype'],
+    bazooka: ['A bold digital experience shaped around energy, character, and memorable interaction.', 'Website | Art direction | UX/UI design'],
+    forma: ['A calmer workspace for bringing projects, people, and plans together.', 'Web App | UX/UI design | Design system']
   };
-  let activeIndex = 0;
-  let scrollFrame = 0;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const projectKeys = slides.map(slide => slide.dataset.projectSlide);
-  function centerSlide(index, smooth = true) {
-    const slide = slides[(index + slides.length) % slides.length];
-    const left = slide.offsetLeft - (rail.clientWidth - slide.clientWidth) / 2;
-    rail.scrollTo({left, behavior:smooth && !reduced.matches ? 'smooth' : 'instant'});
+  let activeIndex = 2;
+  let scrollFrame = 0;
+  let wheelFrame = 0;
+  let wheelTarget = 0;
+  let snapTimer = 0;
+  let titleToken = 0;
+
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  const slideLeft = slide => slide.offsetLeft - (rail.clientWidth - slide.clientWidth) / 2;
+
+  function animateTitle(nextTitle) {
+    if (title.textContent === nextTitle) return;
+    const token = ++titleToken;
+    if (reduced.matches) { title.textContent = nextTitle; return; }
+    title.classList.remove('is-entering');
+    title.classList.add('is-fading');
+    window.setTimeout(() => {
+      if (token !== titleToken) return;
+      title.textContent = nextTitle;
+      title.classList.remove('is-fading');
+      title.classList.add('is-entering');
+      window.setTimeout(() => title.classList.remove('is-entering'), 520);
+    }, 180);
   }
+
+  function updateLiquidGeometry() {
+    const railBox = rail.getBoundingClientRect();
+    const center = railBox.left + railBox.width / 2;
+    slides.forEach(slide => {
+      const box = slide.getBoundingClientRect();
+      const offset = clamp((box.left + box.width / 2 - center) / Math.max(1, railBox.width * .5), -1.35, 1.35);
+      const distance = Math.min(1, Math.abs(offset));
+      slide.style.setProperty('--liquid-y', `${(distance * 22).toFixed(2)}px`);
+      slide.style.setProperty('--liquid-rotate', `${(-offset * 3.6).toFixed(2)}deg`);
+      slide.style.setProperty('--liquid-scale-x', (1 - distance * .035).toFixed(3));
+      slide.style.setProperty('--liquid-scale-y', (1 + distance * .055).toFixed(3));
+      slide.style.setProperty('--liquid-radius', `${(distance * 26).toFixed(1)}px`);
+      slide.style.setProperty('--liquid-glow', (1 - distance * .72).toFixed(3));
+    });
+  }
+
   function select(index) {
     activeIndex = index;
     slides.forEach((slide, i) => {
       const distance = Math.abs(i - index);
+      const projectName = slide.querySelector('h3').textContent;
       slide.classList.toggle('is-active', i === index);
       slide.classList.toggle('is-near', distance === 1);
       slide.classList.toggle('is-far', distance > 1);
       slide.setAttribute('aria-current', i === index ? 'true' : 'false');
-      slide.style.setProperty('--project-distance', String(distance));
-      slide.style.setProperty('--project-near-gap', `${distance === 1 ? 34 : 0}px`);
+      slide.querySelector('.project-select').setAttribute('aria-label', i === index ? `Open ${projectName} project` : `Bring ${projectName} project to the center`);
     });
     const key = projectKeys[index];
-    title.textContent = slides[index].querySelector('h3').textContent;
-    captionIndex.textContent = `0${index + 1}`;
+    animateTitle(slides[index].querySelector('h3').textContent);
+    captionIndex.textContent = slides[index].dataset.projectNumber;
     caption.textContent = details[key][0];
     scope.textContent = details[key][1];
-    openCase.dataset.project = key;
-    openCase.setAttribute('aria-label', `Open ${slides[index].querySelector('h3').textContent} case study`);
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('is-active', i === index);
-      dot.setAttribute('aria-pressed', String(i === index));
-    });
+    section.classList.remove('caption-refresh');
+    void section.offsetWidth;
+    section.classList.add('caption-refresh');
   }
+
   function nearestSlide() {
     const center = rail.getBoundingClientRect().left + rail.clientWidth / 2;
-    let nearest = 0, delta = Infinity;
+    let nearest = 0;
+    let delta = Infinity;
     slides.forEach((slide, i) => {
       const box = slide.getBoundingClientRect();
       const distance = Math.abs(box.left + box.width / 2 - center);
       if (distance < delta) { delta = distance; nearest = i; }
     });
     if (nearest !== activeIndex) select(nearest);
+    return nearest;
   }
+
+  function centerSlide(index, smooth = true) {
+    const normalized = clamp(index, 0, slides.length - 1);
+    const left = clamp(slideLeft(slides[normalized]), 0, rail.scrollWidth - rail.clientWidth);
+    wheelTarget = left;
+    rail.scrollTo({left, behavior:smooth && !reduced.matches ? 'smooth' : 'instant'});
+  }
+
+  function runLiquidWheel() {
+    const difference = wheelTarget - rail.scrollLeft;
+    rail.scrollLeft += difference * .115;
+    updateLiquidGeometry();
+    if (Math.abs(difference) > .45) {
+      wheelFrame = requestAnimationFrame(runLiquidWheel);
+      return;
+    }
+    rail.scrollLeft = wheelTarget;
+    wheelFrame = 0;
+    window.clearTimeout(snapTimer);
+    snapTimer = window.setTimeout(() => centerSlide(nearestSlide()), 90);
+  }
+
+  function showComingSoon(name) {
+    const toast = document.querySelector('#toast');
+    if (!toast) return;
+    toast.textContent = `${name} case study is coming soon.`;
+    toast.classList.add('show');
+    window.clearTimeout(toast._projectTimer);
+    toast._projectTimer = window.setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
   rail.addEventListener('scroll', () => {
     if (scrollFrame) return;
-    scrollFrame = requestAnimationFrame(() => { scrollFrame = 0; nearestSlide(); });
+    scrollFrame = requestAnimationFrame(() => {
+      scrollFrame = 0;
+      updateLiquidGeometry();
+      nearestSlide();
+      if (!wheelFrame) wheelTarget = rail.scrollLeft;
+    });
   }, {passive:true});
+
   slides.forEach((slide, i) => slide.querySelector('.project-select').addEventListener('click', () => {
-    if (i === activeIndex) openCase.click();
-    else centerSlide(i);
+    if (i !== activeIndex) { centerSlide(i); return; }
+    const key = projectKeys[i];
+    if (studies[key]) openCaseStudy(studies[key]);
+    else showComingSoon(slide.querySelector('h3').textContent);
   }));
-  dots.forEach((dot, i) => dot.addEventListener('click', () => centerSlide(i)));
-  previous.addEventListener('click', () => centerSlide(activeIndex - 1));
-  next.addEventListener('click', () => centerSlide(activeIndex + 1));
+
   rail.addEventListener('wheel', event => {
-    if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+    if (!delta) return;
     event.preventDefault();
-    rail.scrollBy({left:event.deltaY, behavior:'smooth'});
+    wheelTarget = clamp((wheelFrame ? wheelTarget : rail.scrollLeft) + delta * 1.08, 0, rail.scrollWidth - rail.clientWidth);
+    if (!wheelFrame) wheelFrame = requestAnimationFrame(runLiquidWheel);
   }, {passive:false});
+
   rail.addEventListener('keydown', event => {
     if (event.key === 'ArrowRight') { event.preventDefault(); centerSlide(activeIndex + 1); }
     if (event.key === 'ArrowLeft') { event.preventDefault(); centerSlide(activeIndex - 1); }
+    if (event.key === 'Home') { event.preventDefault(); centerSlide(0); }
+    if (event.key === 'End') { event.preventDefault(); centerSlide(slides.length - 1); }
   });
-  select(0);
-  requestAnimationFrame(() => centerSlide(0, false));
-  window.addEventListener('resize', () => centerSlide(activeIndex, false), {passive:true});
+
+  select(activeIndex);
+  requestAnimationFrame(() => {
+    centerSlide(activeIndex, false);
+    updateLiquidGeometry();
+  });
+  window.addEventListener('resize', () => {
+    centerSlide(activeIndex, false);
+    updateLiquidGeometry();
+  }, {passive:true});
 })();
 
 // Contact brief form

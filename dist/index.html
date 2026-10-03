@@ -11,8 +11,8 @@
   <link rel="icon" type="image/svg+xml" href="logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=orbit-10">
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=orbit-12">
   <link rel="stylesheet" href="hero-motion.css?v=7">
 </head>
 <body>
@@ -22,11 +22,12 @@
   </div>
 
   <header class="site-header" id="siteHeader">
-    <a class="brand" href="#home" aria-label="Karem Ehab home"><span class="brand-logo"><img src="logo.svg" alt="" width="194" height="240"></span></a>
+    <a class="brand" href="#home" aria-label="Karem Ehab home"><span class="brand-logo"><img src="figma-karem-logo.svg" alt=""></span></a>
     <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
       <a href="#projects">Projects</a>
       <a href="about.html">About</a>
-      <a href="#play">Play</a>
+      <a href="#contact">Contact</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="headerMenu"><span></span><span></span></button>
     <div class="header-menu header-menu-compact" id="headerMenu" hidden>
@@ -58,7 +59,7 @@
         </div>
         <div class="hero-selected-action">
           <p>Thoughtful design. Playful by nature.</p>
-          <a class="pill dark" href="#work">Discover my work</a>
+          <a class="pill dark" href="#projects">Discover my work</a>
         </div>
         <span class="hero-scroll-note">Scroll to move <i aria-hidden="true">↓</i></span>
       </div>
@@ -69,56 +70,54 @@
       <div>LESS FRICTION <span class="loop-mark"></span> MORE FEELING <span class="loop-mark"></span> CLEAR THINKING <span class="loop-mark"></span> BOLD IDEAS <span class="loop-mark"></span> LESS FRICTION <span class="loop-mark"></span> MORE FEELING <span class="loop-mark"></span> CLEAR THINKING <span class="loop-mark"></span> BOLD IDEAS <span class="loop-mark"></span></div>
     </div>
 
-    <!-- Projects carousel: visual screens open into the full project case study. -->
-    <section class="projects-section" id="projects" aria-labelledby="projectsTitle">
-      <div class="section-head">
-        <span class="eyebrow">01 / SELECTED PROJECTS</span>
-        <p>Scroll to explore. Select a project to bring it into focus.</p>
-      </div>
+    <!-- Projects carousel adapted from the selected Figma desktop frame. -->
+    <section class="projects-section" id="projects" aria-label="Selected projects">
       <h2 class="projects-back-title" id="projectsTitle" aria-hidden="true">Morrow</h2>
       <div class="projects-rail" id="projectsRail" tabindex="0" aria-label="Projects carousel">
-        <article class="project-slide is-active" data-project-slide="morrow" aria-current="true">
-          <button class="project-select" type="button" aria-label="Select Morrow project">
-            <span class="project-slide-index">01</span>
-            <span class="project-slide-type">FINTECH · MOBILE APP</span>
-            <img src="morrow-case.webp" alt="Morrow mobile finance interface screens" width="1536" height="1024" decoding="async">
-            <span class="project-slide-open">View project <b aria-hidden="true">↗</b></span>
-          </button>
-          <h3>Morrow</h3>
-        </article>
-        <article class="project-slide" data-project-slide="gather">
+        <article class="project-slide" data-project-slide="gather" data-project-number="01">
           <button class="project-select" type="button" aria-label="Select Gather project">
-            <span class="project-slide-index">02</span>
-            <span class="project-slide-type">FOOD TECH · MOBILE APP</span>
-            <img src="gather-case.webp" alt="Gather food discovery and pickup app interface screens" width="1536" height="1024" loading="lazy" decoding="async">
-            <span class="project-slide-open">View project <b aria-hidden="true">↗</b></span>
+            <img class="project-art" src="gather-case.webp" alt="Gather food discovery and pickup app interface screens" width="1536" height="1024" loading="lazy" decoding="async">
+            <span class="project-progress" aria-hidden="true"><img src="figma-project-progress.svg" alt=""></span>
+            <span class="project-slide-open">View Project <img src="figma-project-receive.svg" alt="" aria-hidden="true"></span>
           </button>
-          <h3>Gather</h3>
+          <div class="project-slide-meta"><span class="project-side-index">01</span><h3>Gather</h3></div>
         </article>
-        <article class="project-slide" data-project-slide="forma">
-          <button class="project-select" type="button" aria-label="Select Forma project">
-            <span class="project-slide-index">03</span>
-            <span class="project-slide-type">WORKSPACE · WEB APP</span>
-            <img src="forma-case.webp" alt="Forma workspace and project planning interface" width="1536" height="1024" loading="lazy" decoding="async">
-            <span class="project-slide-open">View project <b aria-hidden="true">↗</b></span>
+        <article class="project-slide" data-project-slide="olfah" data-project-number="02">
+          <button class="project-select project-logo-card" type="button" aria-label="Select Olfah project">
+            <img class="project-art project-logo-art" src="figma-project-olfah.svg" alt="Olfah project logo" loading="lazy" decoding="async">
+            <span class="project-progress" aria-hidden="true"><img src="figma-project-progress.svg" alt=""></span>
+            <span class="project-slide-open">View Project <img src="figma-project-receive.svg" alt="" aria-hidden="true"></span>
           </button>
-          <h3>Forma</h3>
+          <div class="project-slide-meta"><span class="project-side-index">02</span><h3>Olfah</h3></div>
+        </article>
+        <article class="project-slide is-active" data-project-slide="morrow" data-project-number="03" aria-current="true">
+          <button class="project-select" type="button" aria-label="Open Morrow project case study">
+            <img class="project-art" src="figma-project-feature.png" alt="Morrow finance app displayed on two mobile screens" width="1536" height="1024" decoding="async">
+            <span class="project-progress" aria-hidden="true"><img src="figma-project-progress.svg" alt=""></span>
+            <span class="project-slide-open">View Project <img src="figma-project-receive.svg" alt="" aria-hidden="true"></span>
+          </button>
+          <div class="project-slide-meta"><span class="project-side-index">03</span><h3>Morrow</h3></div>
+        </article>
+        <article class="project-slide" data-project-slide="bazooka" data-project-number="04">
+          <button class="project-select project-logo-card" type="button" aria-label="Select Bazooka project">
+            <img class="project-art project-logo-art" src="figma-project-bazooka.svg" alt="Bazooka project logo" loading="lazy" decoding="async">
+            <span class="project-progress" aria-hidden="true"><img src="figma-project-progress.svg" alt=""></span>
+            <span class="project-slide-open">View Project <img src="figma-project-receive.svg" alt="" aria-hidden="true"></span>
+          </button>
+          <div class="project-slide-meta"><span class="project-side-index">04</span><h3>Bazooka</h3></div>
+        </article>
+        <article class="project-slide" data-project-slide="forma" data-project-number="05">
+          <button class="project-select" type="button" aria-label="Select Forma project">
+            <img class="project-art" src="forma-case.webp" alt="Forma workspace and project planning interface" width="1536" height="1024" loading="lazy" decoding="async">
+            <span class="project-progress" aria-hidden="true"><img src="figma-project-progress.svg" alt=""></span>
+            <span class="project-slide-open">View Project <img src="figma-project-receive.svg" alt="" aria-hidden="true"></span>
+          </button>
+          <div class="project-slide-meta"><span class="project-side-index">05</span><h3>Forma</h3></div>
         </article>
       </div>
       <div class="projects-caption" aria-live="polite" aria-atomic="true">
-        <span class="projects-caption-index">01</span>
         <p>Everyday finance, simplified with a clear balance, useful insights, and quick actions.</p>
-        <span class="projects-caption-scope">MOBILE APP&nbsp; | &nbsp;UI/UX DESIGN&nbsp; | &nbsp;PROTOTYPE</span>
-      </div>
-      <div class="projects-controls">
-        <button type="button" class="projects-arrow" data-project-step="-1" aria-label="Previous project">←</button>
-        <div class="projects-dots" role="group" aria-label="Choose a project">
-          <button type="button" class="is-active" data-project-goto="0" aria-label="Show Morrow" aria-pressed="true"></button>
-          <button type="button" data-project-goto="1" aria-label="Show Gather" aria-pressed="false"></button>
-          <button type="button" data-project-goto="2" aria-label="Show Forma" aria-pressed="false"></button>
-        </div>
-        <button type="button" class="projects-arrow" data-project-step="1" aria-label="Next project">→</button>
-        <button type="button" class="projects-open-case" data-project="morrow">Open case study <span aria-hidden="true">↗</span></button>
+        <div class="projects-caption-meta"><span class="projects-caption-index">03</span><span class="projects-caption-scope">Mobile App | UX/UI design | Prototype</span></div>
       </div>
     </section>
 
@@ -374,7 +373,7 @@
   <div id="toast" role="status"></div>
   <noscript><style>.site-loader,.asset-loader{display:none}.header-menu[hidden]{display:block!important}.menu-toggle{display:none}</style></noscript>
   <script src="preferences.js?v=orbit-9"></script>
-  <script src="app.js?v=orbit-10"></script>
+  <script src="app.js?v=orbit-12"></script>
   <script src="interactions.js?v=orbit-4"></script>
   <script src="navigation.js?v=orbit-8"></script>
   <script src="cursor.js?v=orbit-4"></script>
