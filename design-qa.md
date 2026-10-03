@@ -61,4 +61,17 @@
 - Console errors: none.
 - Production build verification: passed.
 
+## Sequential project story extension — 2026-10-03
+
+- Extended the selected-cover moment into five full-screen project chapters: Morrow → Gather → Forma → Olfah → Bazooka.
+- Continued scrolling now performs a layered card handoff: the current chapter lifts and soft-tilts away while the next chapter scales into the viewport from beneath it.
+- Added real supporting UI screens to the Morrow, Gather, and Forma chapters so the showcase presents interface work as well as campaign covers.
+- Added a persistent chapter rail with direct project jumps, active-state feedback, keyboard previous/next behavior, and case-study actions.
+- Retained the existing four-link header, menu behavior, appearance settings, and portfolio color tokens.
+- Desktop QA: verified Morrow, Gather, and Forma chapter states, direct chapter navigation, fixed header readability, and continuous scroll behavior.
+- Mobile QA at 390 × 844: verified full-width action treatment, horizontal chapter index, readable card copy, no project-action/FAB collision, and no horizontal overflow.
+- Dark appearance QA: verified chapter card, header, navigation, and CTA contrast.
+- Console warnings/errors: none.
+- Production build verification: passed.
+
 final result: passed

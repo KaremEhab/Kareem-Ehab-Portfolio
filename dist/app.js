@@ -474,7 +474,7 @@ document.querySelectorAll('dialog').forEach(d => {
   });
 });
 
-// Scroll-driven project orbit, matched to the supplied motion reference.
+// Scroll-driven orbit that opens into a sequential, full-screen project story.
 (() => {
   const section = document.querySelector('.orbit-project-section');
   const stage = document.querySelector('#orbitProjectStage');
@@ -482,6 +482,8 @@ document.querySelectorAll('dialog').forEach(d => {
   if (!section || !stage || !orbit) return;
 
   const tiles = [...orbit.querySelectorAll('.orbit-project-tile')];
+  const chapters = [...document.querySelectorAll('[data-project-chapter]')];
+  const chapterButtons = [...document.querySelectorAll('[data-chapter-jump]')];
   const copy = document.querySelector('#orbitProjectCopy');
   const name = copy.querySelector('.orbit-project-name');
   const index = copy.querySelector('.orbit-project-index');
@@ -496,10 +498,13 @@ document.querySelectorAll('dialog').forEach(d => {
     bazooka: {name:'Bazooka', index:'04', type:'Website · Art Direction'},
     forma: {name:'Forma', index:'05', type:'Web App · Design System'}
   };
+  const chapterStart = .30;
+  const chapterRange = .70;
   const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
   const lerp = (from, to, amount) => from + (to - from) * amount;
   const ease = value => 1 - Math.pow(1 - clamp(value), 3);
   let activeTile = 4;
+  let activeChapter = -1;
   let frame = 0;
   let lastProgress = -1;
   let selectTimer = 0;
@@ -521,10 +526,13 @@ document.querySelectorAll('dialog').forEach(d => {
     toast._projectTimer = window.setTimeout(() => toast.classList.remove('show'), 2200);
   }
 
-  function openActiveProject() {
-    const key = tiles[activeTile].dataset.orbitProject;
+  function openProject(key) {
     if (studies[key]) openCaseStudy(studies[key]);
     else showComingSoon(details[key].name);
+  }
+
+  function openActiveProject() {
+    openProject(tiles[activeTile].dataset.orbitProject);
   }
 
   function updateCopy(nextTile) {
@@ -564,16 +572,38 @@ document.querySelectorAll('dialog').forEach(d => {
     return clamp(-section.getBoundingClientRect().top / max);
   }
 
+  function jumpToChapter(chapterIndex) {
+    const chapterProgress = chapterStart + chapterRange * ((chapterIndex + .08) / chapters.length);
+    const max = Math.max(1, section.offsetHeight - innerHeight);
+    window.scrollTo({top: section.offsetTop + max * chapterProgress, behavior: reduced.matches ? 'instant' : 'smooth'});
+  }
+
+  function updateActiveChapter(nextChapter) {
+    if (nextChapter === activeChapter) return;
+    activeChapter = nextChapter;
+    chapters.forEach((chapter, chapterIndex) => {
+      const current = chapterIndex === activeChapter;
+      chapter.classList.toggle('is-current', current);
+      chapter.setAttribute('aria-hidden', String(!current));
+    });
+    chapterButtons.forEach((button, buttonIndex) => {
+      const current = buttonIndex === activeChapter;
+      button.classList.toggle('is-active', current);
+      if (current) button.setAttribute('aria-current', 'true');
+      else button.removeAttribute('aria-current');
+    });
+  }
+
   function render(force = false) {
     frame = 0;
-    const progress = reduced.matches ? .53 : currentProgress();
+    const progress = currentProgress();
     if (!force && Math.abs(progress - lastProgress) < .0002) return;
     lastProgress = progress;
 
-    const row = ease(progress / .18);
-    const ring = ease((progress - .18) / .28);
-    const rotate = ease((progress - .42) / .28);
-    const focus = ease((progress - .73) / .27);
+    const row = ease(progress / .055);
+    const ring = ease((progress - .05) / .10);
+    const rotate = ease((progress - .13) / .09);
+    const focus = ease((progress - .22) / .08);
     const width = stage.clientWidth;
     const height = stage.clientHeight;
     const compact = width < 640;
@@ -582,23 +612,25 @@ document.querySelectorAll('dialog').forEach(d => {
     const radiusX = compact ? width * .34 : Math.min(width * .235, 350);
     const radiusY = compact ? Math.min(height * .27, 220) : Math.min(height * .32, 270);
     const rotation = rotate * Math.PI * 1.05;
+    const chapterMode = progress >= chapterStart;
 
     section.style.setProperty('--orbit-progress', progress.toFixed(4));
     copy.style.setProperty('--copy-ring', ring.toFixed(4));
     copy.style.setProperty('--copy-focus', focus.toFixed(4));
     progressBar.style.transform = `scaleX(${progress.toFixed(4)})`;
+    stage.classList.toggle('is-chapter-mode', chapterMode);
+    document.body.classList.toggle('project-chapter-active', chapterMode && progress < .995);
 
     tiles.forEach((tile, tileIndex) => {
       const ratio = tile.classList.contains('shape-wide') ? [1.22,.82] : tile.classList.contains('shape-tall') ? [.86,1.25] : [1,1];
       const tileWidth = base * ratio[0];
       const tileHeight = base * ratio[1];
       const rowX = (tileIndex - activeTile) * rowGap;
-      const rowY = 0;
       const angle = ((tileIndex - activeTile) / tiles.length) * Math.PI * 2 + Math.PI / 2 + rotation;
       const ringX = Math.cos(angle) * radiusX;
       const ringY = Math.sin(angle) * radiusY;
       let x = lerp(rowX, ringX, ring);
-      let y = lerp(rowY, ringY, ring);
+      let y = lerp(0, ringY, ring);
       let itemWidth = tileWidth;
       let itemHeight = tileHeight;
       let opacity = tileIndex === activeTile ? 1 : row;
@@ -624,15 +656,37 @@ document.querySelectorAll('dialog').forEach(d => {
       tile.style.transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) rotate(${itemRotation.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
       tile.style.borderRadius = `${lerp(1, 0, focus).toFixed(2)}px`;
     });
+
+    if (chapters.length) {
+      const chapterPosition = clamp((progress - chapterStart) / chapterRange, 0, .9998) * chapters.length;
+      const nextChapter = chapterMode ? Math.min(chapters.length - 1, Math.floor(chapterPosition + .08)) : -1;
+      updateActiveChapter(nextChapter);
+      chapters.forEach((chapter, chapterIndex) => {
+        const relative = chapterPosition - chapterIndex;
+        const enter = ease((relative + .24) / .24);
+        const exit = ease((relative - .76) / .24);
+        const visibility = enter * (1 - exit);
+        const chapterScale = lerp(.84, 1, enter) * lerp(1, .92, exit);
+        const chapterY = lerp(height * .28, 0, enter) - exit * height * .17;
+        const chapterRotation = lerp(3.6, 0, enter) - exit * 1.8;
+        chapter.style.setProperty('--chapter-opacity', (chapterMode ? visibility : 0).toFixed(4));
+        chapter.style.setProperty('--chapter-scale', chapterScale.toFixed(4));
+        chapter.style.setProperty('--chapter-y', `${chapterY.toFixed(2)}px`);
+        chapter.style.setProperty('--chapter-rotate', `${chapterRotation.toFixed(2)}deg`);
+        chapter.style.setProperty('--chapter-depth', String(chapterIndex + 1));
+      });
+    }
   }
 
   function requestRender() { if (!frame) frame = requestAnimationFrame(render); }
   tiles.forEach((tile, tileIndex) => tile.addEventListener('click', () => selectTile(tileIndex, true)));
+  chapterButtons.forEach((button, buttonIndex) => button.addEventListener('click', () => jumpToChapter(buttonIndex)));
+  chapters.forEach(chapter => chapter.querySelector('[data-open-project]')?.addEventListener('click', () => openProject(chapter.dataset.projectChapter)));
   openButton.addEventListener('click', openActiveProject);
   stage.addEventListener('keydown', event => {
-    if (event.key === 'ArrowRight') { event.preventDefault(); selectTile(activeTile + 1); }
-    if (event.key === 'ArrowLeft') { event.preventDefault(); selectTile(activeTile - 1); }
-    if (event.key === 'Enter') { event.preventDefault(); openActiveProject(); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); activeChapter >= 0 ? jumpToChapter(Math.min(chapters.length - 1, activeChapter + 1)) : selectTile(activeTile + 1); }
+    if (event.key === 'ArrowLeft') { event.preventDefault(); activeChapter >= 0 ? jumpToChapter(Math.max(0, activeChapter - 1)) : selectTile(activeTile - 1); }
+    if (event.key === 'Enter') { event.preventDefault(); activeChapter >= 0 ? openProject(chapters[activeChapter].dataset.projectChapter) : openActiveProject(); }
   });
   window.addEventListener('scroll', requestRender, {passive:true});
   window.addEventListener('resize', () => render(true), {passive:true});
