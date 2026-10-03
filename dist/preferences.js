@@ -6,6 +6,18 @@
   const systemTheme = matchMedia('(prefers-color-scheme: dark)');
   let locale = root.lang === 'ar' ? 'ar' : 'en';
   const translations = {
+    'SELECTED WORK / 01—03':'أعمال مختارة / ٠١—٠٣',
+    'Ideas, brought to life.':'أفكار تنبض بالحياة.',
+    '01 / Product design · Fintech concept':'٠١ / تصميم منتج · مفهوم مالي',
+    '02 / Product design · Food & lifestyle':'٠٢ / تصميم منتج · الطعام وأسلوب الحياة',
+    '03 / Web application · Design system':'٠٣ / تطبيق ويب · نظام تصميم',
+    'Making everyday money easier to understand.':'تبسيط فهم وإدارة المال كل يوم.',
+    'Connecting discovery, ordering, and pickup in one clear journey.':'ربط الاكتشاف والطلب والاستلام في رحلة واضحة.',
+    'Giving teams a clearer space to plan and focus.':'مساحة أوضح للتخطيط والتركيز مع الفريق.',
+    'Identity explorations.':'استكشافات الهوية.',
+    'Brand experience':'تجربة العلامة التجارية',
+    'Art direction':'الإخراج الفني',
+    'View case study':'اقرأ دراسة الحالة',
     'THE FACE BEHIND THE PIXELS':'الوجه وراء التصميم',
     'Silver portrait of Karem Ehab':'بورتريه فضي لكريم إيهاب',
     'Interactive silver portrait of Karem Ehab that follows your pointer and blinks':'بورتريه فضي تفاعلي لكريم إيهاب يتابع المؤشر ويرمش',

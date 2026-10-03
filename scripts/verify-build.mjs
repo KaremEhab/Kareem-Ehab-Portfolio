@@ -4,6 +4,8 @@ import { resolve } from "node:path";
 const outputDirectory = resolve("dist");
 const requiredFiles = [
   "index.html",
+  "project-gallery.css",
+  "project-gallery.js",
   "about.html",
   "about-page.js",
   "silver-face.js",
