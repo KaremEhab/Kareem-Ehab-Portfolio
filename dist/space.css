@@ -3,7 +3,7 @@ html { scroll-padding-top:120px; }
 body { padding-top:100px; }
 .site-header,.site-header.is-docked {
  position:fixed; top:0; inset-inline:0; width:100%; max-width:none; height:88px;
- margin:0; padding:16px max(6vw,calc((100vw - 1240px)/2));
+ margin:0; transform:none; padding:16px max(6vw,calc((100vw - 1240px)/2));
  grid-template-columns:44px minmax(0,1fr) 44px; gap:24px;
  border:0; border-radius:0; background:var(--paper); box-shadow:none;
  backdrop-filter:none; -webkit-backdrop-filter:none; transition:none;
@@ -33,12 +33,34 @@ body { padding-top:100px; }
 .footer-inner { max-width:1240px; margin-inline:auto; padding:160px 6% 80px; }
 .footer-brief { gap:100px; padding-bottom:40px; }
 .footer-brief #briefForm { gap:28px; }
+/* All pages and project states use the same navigation surface. */
+body .site-header,body.project-chapter-active .site-header {
+ background:var(--paper)!important; border:0!important; border-radius:0!important;
+ box-shadow:none!important; backdrop-filter:none!important; -webkit-backdrop-filter:none!important;
+ mix-blend-mode:normal!important; color:var(--ink)!important;
+}
+body .site-header nav a { color:var(--ink)!important; mix-blend-mode:normal!important; }
+body .site-header .brand-logo img { filter:brightness(0)!important; mix-blend-mode:normal!important; }
+html[data-effective-theme=dark] body .site-header .brand-logo img { filter:brightness(0) invert(1)!important; }
+body .site-header .menu-toggle { color:var(--ink)!important; mix-blend-mode:normal!important; border:1px solid var(--border); background:var(--paper); }
+body .site-header nav a:after { display:none; }
+.spatino-main { padding-top:64px; }
+.spatino-section { padding-block:140px; }
+.spatino-container { max-width:1120px; }
+.projects-section.orbit-project-section { margin-block:120px; }
+.orbit-project-stage { top:88px; height:calc(100svh - 88px); }
+.orbit-chapter-info { padding:40px; }
 @media(max-width:900px) {
  .site-header,.site-header.is-docked { padding-inline:5%; gap:12px; }
  .site-header nav { gap:12px; }
  .hero-selected { padding-top:24px; padding-bottom:72px; }
  .hero-orbit-anchor { width:86%; }
  .footer-brief { gap:48px; }
+ .spatino-main { padding-top:32px; }
+ .spatino-section { padding-block:88px; }
+ .projects-section.orbit-project-section { margin-block:72px; }
+ .orbit-project-stage { top:76px; height:calc(100svh - 76px); }
+ .orbit-chapter-info { padding:22px; }
 }
 @media(max-width:640px) {
  body { padding-top:84px; }

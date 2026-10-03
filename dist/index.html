@@ -1,15 +1,434 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f5f3"><meta name="color-scheme" content="light dark"><script>try{const t=localStorage.getItem("karem-theme")||"system";document.documentElement.dataset.theme=["system","light","dark"].includes(t)?t:"system";const l=localStorage.getItem("karem-locale")==="ar"?"ar":"en";document.documentElement.lang=l;document.documentElement.dir=l==="ar"?"rtl":"ltr"}catch(e){document.documentElement.dataset.theme="system"}</script><meta name="description" content="Karem Ehab, UI/UX designer. Thoughtful digital experiences with a playful point of view."><title>Karem Ehab — UI/UX Designer</title><link rel="icon" type="image/svg+xml" href="logo.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css?v=orbit-6"><link rel="stylesheet" href="hero-motion.css?v=5"><link rel="stylesheet" href="space.css?v=1"></head>
-<body><div id="siteLoader" class="site-loader" role="status" aria-label="Loading portfolio"><div class="logo-disc"><img src="logo-loading.svg" alt="" width="194" height="240"></div><span>Loading…</span></div><header class="site-header" id="siteHeader"><a class="brand" href="#home" aria-label="Karem Ehab home"><span class="brand-logo"><img src="logo.svg" alt="" width="194" height="240"></span></a><nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#play">Play</a><a class="header-contact" href="#contact">Contact</a></nav><button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="headerMenu"><span></span><span></span></button><div class="header-menu" id="headerMenu" hidden><div class="menu-row"><label for="themeSelect">Appearance</label><select id="themeSelect" class="theme-select" aria-label="Color theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></div><div class="menu-row"><span>Language</span><button id="localeToggle" class="utility-button" data-no-translate lang="ar" aria-label="Switch to Arabic">العربية</button></div></div></header>
-<main><section class="hero hero-selected" id="home"><div class="hero-selected-stage"><h1 class="hero-selected-title" aria-label="Ideas in motion."><span class="hero-title-ideas">Ideas</span><span class="hero-title-in">in</span><span class="hero-title-motion">motion<span aria-hidden="true">.</span></span></h1><div class="hero-orbit-shell" aria-label="Interactive cobalt three-dimensional orbital sculpture"><div class="hero-orbit-anchor"><div class="hero-orbit-spinner"><img class="hero-orbit-art" id="heroModel" src="hero-blue-isolated.png" alt="Glossy cobalt loop sculpture" width="1488" height="1057" fetchpriority="high" decoding="async"></div></div></div><div class="hero-selected-outline" aria-hidden="true"><span class="hero-title-ideas">Ideas</span><span class="hero-title-in">in</span><span class="hero-title-motion">motion<span>.</span></span></div><div class="hero-selected-action"><p>Thoughtful design. Playful by nature.</p><a class="pill dark" href="#work">Discover my work</a></div><span class="hero-scroll-note">Scroll to move <i aria-hidden="true">↓</i></span></div></section>
-<div class="ticker" aria-hidden="true"><div>LESS FRICTION <span class="loop-mark"></span> MORE FEELING <span class="loop-mark"></span> CLEAR THINKING <span class="loop-mark"></span> BOLD IDEAS <span class="loop-mark"></span> LESS FRICTION <span class="loop-mark"></span> MORE FEELING <span class="loop-mark"></span> CLEAR THINKING <span class="loop-mark"></span> BOLD IDEAS <span class="loop-mark"></span></div></div>
-<section class="work section" id="work"><div class="section-head"><div><span class="eyebrow">01 / SELECTED EXPLORATIONS</span><h2>Selected work.</h2></div></div><div class="project-grid">
-<button class="project" data-project="morrow"><div class="project-cover finance"><span class="cover-tag">FINTECH / MOBILE</span><div class="phone"><div class="phone-top">morrow<span>•••</span></div><small>Your money, at a glance</small><h3>$4,280<span>.00</span></h3><div class="mini-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="phone-actions"><span>Send +</span><span>Add money</span></div><div class="transaction"><b>Everyday spending</b><span>See all</span></div><div class="transaction"><span>☕ Coffee break</span><b>− $4.50</b></div><div class="transaction"><span>↗ Monthly income</span><b>+ $2,400</b></div></div></div><div class="project-meta"><div><h3>Morrow</h3><p>Everyday finance, simplified</p></div><span class="project-open">+</span></div></button>
-<button class="project" data-project="gather"><div class="project-cover food"><span class="cover-tag">FOOD & LIFESTYLE / MOBILE</span><div class="food-title">Good food.<br>Zero fuss<span>®</span></div><div class="food-panel"><div class="food-nav">gather<span>Menu ☰</span></div><small>YOUR LUNCH BREAK, UPGRADED</small><h3>What sounds<br>good today?</h3><div class="food-tabs"><span>All picks</span><span>Quick bites</span><span>Coffee</span></div><div class="food-order"><b>The lunch club</b><p>Fresh picks. Ready when you are.</p><span>Explore the menu +</span></div></div><span class="food-sticker">less wait.<br>more taste.</span></div><div class="project-meta"><div><h3>Gather</h3><p>Good food, ready for pickup</p></div><span class="project-open">+</span></div></button>
-<button class="project wide" data-project="forma"><div class="project-cover dashboard"><span class="cover-tag">WORKSPACE / WEB APP</span><div class="dashboard-copy"><h3>A little more flow.<br>A lot less chaos.</h3><span>FORMA / THE FOCUS WORKSPACE</span></div><div class="dash-window"><aside><b>forma.</b><span class="selected">◉ Overview</span><span>▦ Projects</span><span>◷ My tasks</span><span>✧ Notes</span></aside><div class="dash-main"><div class="dash-heading"><span>Your space, in sync.</span><span class="avatar">K</span></div><p>Make room for your best work.</p><div class="stat-row"><div><small>In progress</small><strong>08</strong></div><div><small>Completed</small><strong>24</strong></div><div><small>Focus time</small><strong>6.5h</strong></div></div><div class="task"><span>Website exploration</span><em>In progress</em></div><div class="task"><span>Design system</span><em>In review</em></div><div class="task"><span>Mobile onboarding</span><em>Completed</em></div></div></div></div><div class="project-meta"><div><h3>Forma</h3><p>Room for focused work</p></div><span class="project-open">+</span></div></button></div></section>
-<section class="about about-v2 section" id="about"><div class="about-heading"><span class="eyebrow">02 / ABOUT</span><h2>Design mind.<br><em>Business thinking.</em></h2><p class="about-lead">I connect clear product thinking with playful, usable interfaces.</p><div class="about-signoff"><span>Karem Ehab</span><small>Alexandria, Egypt</small></div></div><div class="about-profile"><article class="education-card"><span class="fact-label">Education</span><h3>Bachelor of Business Administration</h3><p>Management Information Systems · Alexandria University</p></article><div class="skill-groups" aria-label="Skills"><div class="skill-group"><span class="skill-label">Design</span><div class="skill-list"><span class="skill-chip"><i class="skill-symbol tone-blue" aria-hidden="true">UX</i><b>UI/UX Design</b></span><span class="skill-chip"><i class="skill-symbol tone-lime" aria-hidden="true">PD</i><b>Product Design</b></span><span class="skill-chip"><i class="skill-symbol tone-coral" aria-hidden="true">Ix</i><b>Interaction Design</b></span><span class="skill-chip"><i class="skill-symbol tone-lilac" aria-hidden="true">◫</i><b>Prototyping</b></span></div></div><div class="skill-group"><span class="skill-label">Tools</span><div class="skill-list"><span class="skill-chip"><i class="skill-symbol tool-figma" aria-hidden="true">F</i><b>Figma</b></span><span class="skill-chip"><i class="skill-symbol tool-blender" aria-hidden="true">B</i><b>Blender</b></span><span class="skill-chip"><i class="skill-symbol tool-adobe" aria-hidden="true">A</i><b>Adobe Creative Suite</b></span></div></div><div class="skill-group"><span class="skill-label">Build</span><div class="skill-list"><span class="skill-chip"><i class="skill-symbol tone-lime" aria-hidden="true">DS</i><b>Design Systems</b></span><span class="skill-chip"><i class="skill-symbol tone-blue" aria-hidden="true">Fl</i><b>Flutter</b></span><span class="skill-chip"><i class="skill-symbol tone-coral" aria-hidden="true">↔</i><b>Front-end collaboration</b></span></div></div></div></div></section>
-<section class="principles section" aria-labelledby="principlesTitle"><div class="section-head"><div><span class="eyebrow">03 / THE DETAILS</span><h2 id="principlesTitle">Designed to feel easy.</h2></div></div><div class="principles-grid"><article><div class="principle-preview clarity-preview" aria-hidden="true"><div class="clarity-sheet"><i class="ui-kicker"></i><i class="ui-title"></i><div class="ui-lines"><i></i><i></i></div><i class="ui-action"></i></div></div><div class="principle-caption"><h3>Clarity</h3><p>Less to decode.</p></div></article><article><div class="principle-preview flow-preview" aria-hidden="true"><div class="flow-track"><i></i><i></i><i></i></div><div class="flow-sheet"><i></i><i></i><b>✓</b></div></div><div class="principle-caption"><h3>Flow</h3><p>Fewer steps.</p></div></article><article><div class="principle-preview delight-preview" aria-hidden="true"><div class="delight-control"><span>✓</span><i></i></div></div><div class="principle-caption"><h3>Delight</h3><p>A little personality.</p></div></article></div></section>
-<section class="play section" id="play"><div class="memory-game" id="pixelPairs"><div class="game-intro"><span class="eyebrow" id="gameEyebrow">PIXEL PAIRS</span><div class="game-title-row"><h3 id="gameTitle">Good eyes. Great matches.</h3><button class="game-switch" id="gameSwitch" aria-controls="gameBoard">Color Hunt <span aria-hidden="true">◈</span></button></div><p id="gameInstructions" class="sr-only">Find six pairs. +100 per match, −10 per miss.</p><div class="game-hud"><div class="hud-value"><span>Score</span><b id="gameScore">0</b></div><div class="hud-value"><span>Best</span><b id="gameBest">0</b></div><button class="game-restart" id="gameReset" type="button" aria-label="Restart game"><span aria-hidden="true">↻</span></button></div><span class="sr-only"><b id="gamePairs">0</b><span id="gameGoalLabel"> / 6 pairs</span></span><p id="gameStatus" class="sr-only" role="status" aria-live="polite">Find your first pair.</p></div><div id="gameBoard" class="game-board" role="group" aria-label="Pixel Pairs matching tiles"></div></div></section>
-</main><footer class="scenic-footer" id="contact"><div class="footer-inner"><section class="footer-brief" aria-labelledby="briefTitle"><div class="footer-brief-copy"><span class="eyebrow">LET’S START WITH AN IDEA</span><h2 id="briefTitle" tabindex="-1">What’s your idea?</h2><p>A new product, a better experience, or something unexpected. Tell me what you have in mind.</p></div><form id="briefForm"><label>Your name<input name="name" required autocomplete="name" placeholder="How should I call you?"></label><label>Email<input type="email" name="email" required autocomplete="email" placeholder="you@company.com"></label><label>Tell me about the project<textarea name="project" required rows="4" placeholder="The idea, the challenge, and what you want to achieve…"></textarea></label><button class="pill dark" type="submit">Email my brief</button><p class="form-note">Opens your email app with your brief ready to send.</p></form></section><div class="footer-scene layered-scene" id="contactVisual" role="group" aria-label="Alexandria panorama with Qaitbay Citadel and Bibliotheca Alexandrina"><button class="brief-fab" id="contactButton" type="button" aria-label="Go to project brief"><span class="brief-fab-label">Write a brief</span><span class="brief-fab-icon" aria-hidden="true">+</span></button><img class="scene-layer scene-sea" data-depth=".035" src="alexandria-sea-v2.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async"><img class="scene-layer scene-coast" data-depth=".16" src="alexandria-coast-v2.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async"><img class="scene-layer scene-shore" data-depth=".42" src="alexandria-shore-v2.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async"><div class="footer-bottom"><p>© <span id="year">2026</span> Karem Ehab</p><span>Made with curiosity.</span></div></div></footer>
-<dialog id="caseDialog" class="case-dialog"><button class="close case-close" aria-label="Close case study">×</button><div id="caseContent"></div></dialog>
-<div id="toast" role="status"></div><noscript><style>.site-loader,.asset-loader{display:none}.header-menu[hidden]{display:block!important}.menu-toggle{display:none}</style></noscript><script src="preferences.js?v=orbit-6"></script><script src="app.js?v=orbit-6"></script><script src="interactions.js?v=orbit-6"></script><script src="navigation.js?v=orbit-6"></script><script src="cursor.js?v=orbit-6"></script><script src="hero-motion.js?v=5"></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f5f3">
+  <meta name="color-scheme" content="light dark">
+  <script>try{const t=localStorage.getItem("karem-theme")||"system";document.documentElement.dataset.theme=["system","light","dark"].includes(t)?t:"system";const l=localStorage.getItem("karem-locale")==="ar"?"ar":"en";document.documentElement.lang=l;document.documentElement.dir=l==="ar"?"rtl":"ltr"}catch(e){document.documentElement.dataset.theme="system"}</script>
+  <meta name="description" content="Karem Ehab, UI/UX designer. Thoughtful digital experiences with a playful point of view.">
+  <title>Karem Ehab — UI/UX Designer</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=space-2">
+  <link rel="stylesheet" href="hero-motion.css?v=space-2">
+  <link rel="stylesheet" href="space.css?v=space-2">
+</head>
+<body>
+  <div id="siteLoader" class="site-loader" role="status" aria-label="Loading portfolio">
+    <div class="logo-disc"><img src="logo-loading.svg" alt="" width="194" height="240"></div>
+    <span>Loading…</span>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="./#home" aria-label="Karem Ehab home"><span class="brand-logo"><img src="figma-karem-logo.svg" alt=""></span></a>
+    <nav aria-label="Main navigation">
+      <a href="./#home">Home</a>
+      <a href="./#projects">Projects</a>
+      <a href="about.html">About</a>
+      <a href="./#contact">Contact</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="headerMenu"><span></span><span></span></button>
+    <div class="header-menu header-menu-compact" id="headerMenu" hidden>
+      <div class="menu-row"><label for="themeSelect">Appearance</label><select id="themeSelect" class="theme-select" aria-label="Color theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
+      <div class="menu-row"><span>Language</span><button id="localeToggle" class="utility-button" data-no-translate lang="ar" aria-label="Switch to Arabic">العربية</button></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero hero-selected" id="home">
+      <div class="hero-selected-stage">
+        <h1 class="hero-selected-title" aria-label="Ideas in motion.">
+          <span class="hero-title-ideas">Ideas</span>
+          <span class="hero-title-in">in</span>
+          <span class="hero-title-motion">motion<span aria-hidden="true">.</span></span>
+        </h1>
+        <div class="hero-orbit-shell" aria-label="Interactive cobalt three-dimensional orbital sculpture">
+          <div class="hero-orbit-anchor">
+            <div class="hero-orbit-spinner">
+              <img class="hero-orbit-art" id="heroModel" src="hero-blue-isolated.png" alt="Glossy cobalt loop sculpture" width="1488" height="1057" fetchpriority="high" decoding="async">
+            </div>
+          </div>
+        </div>
+        <div class="hero-selected-outline" aria-hidden="true">
+          <span class="hero-title-ideas">Ideas</span>
+          <span class="hero-title-in">in</span>
+          <span class="hero-title-motion">motion<span>.</span></span>
+        </div>
+        <div class="hero-selected-action">
+          <p>Thoughtful design. Playful by nature.</p>
+          <a class="pill dark" href="#projects">Discover my work</a>
+        </div>
+        <span class="hero-scroll-note">Scroll to move <i aria-hidden="true">↓</i></span>
+      </div>
+    </section>
+
+    <!-- Ticker -->
+    <div class="ticker" aria-hidden="true">
+      <div>LESS FRICTION <span class="loop-mark"></span> MORE FEELING <span class="loop-mark"></span> CLEAR THINKING <span class="loop-mark"></span> BOLD IDEAS <span class="loop-mark"></span> LESS FRICTION <span class="loop-mark"></span> MORE FEELING <span class="loop-mark"></span> CLEAR THINKING <span class="loop-mark"></span> BOLD IDEAS <span class="loop-mark"></span></div>
+    </div>
+
+    <!-- Scroll-driven project orbit recreated from the supplied motion reference. -->
+    <section class="projects-section orbit-project-section" id="projects" aria-label="Selected projects">
+      <div class="orbit-project-stage" id="orbitProjectStage" tabindex="0">
+        <p class="orbit-project-kicker" aria-hidden="true">KAREM EHAB&nbsp;&nbsp; SELECTED WORK</p>
+
+        <div class="orbit-project-copy" id="orbitProjectCopy" aria-live="polite" aria-atomic="true">
+          <span class="orbit-project-index">03</span>
+          <h2 class="orbit-project-name">Morrow</h2>
+          <p class="orbit-project-type">Mobile App · UX/UI Design</p>
+          <button class="orbit-project-open" type="button">View project ↗</button>
+        </div>
+
+        <div class="orbit-projects" id="orbitProjects" role="listbox" aria-label="Choose a project">
+          <button class="orbit-project-tile shape-square" type="button" data-orbit-project="gather" data-project-number="01" role="option" aria-label="Select Gather project">
+            <img src="gather-case.webp" alt="Gather food discovery and pickup app" width="1536" height="1024" decoding="async">
+          </button>
+          <button class="orbit-project-tile shape-tall" type="button" data-orbit-project="olfah" data-project-number="02" role="option" aria-label="Select Olfah project">
+            <img src="figma-project-olfah.svg" alt="Olfah identity project" loading="lazy" decoding="async">
+          </button>
+          <button class="orbit-project-tile shape-tall" type="button" data-orbit-project="morrow" data-project-number="03" role="option" aria-label="Select Morrow project">
+            <img src="morrow-screen-1.jpg" alt="Morrow mobile finance interface" loading="lazy" decoding="async">
+          </button>
+          <button class="orbit-project-tile shape-square" type="button" data-orbit-project="forma" data-project-number="05" role="option" aria-label="Select Forma project">
+            <img src="forma-screen-1.jpg" alt="Forma workspace dashboard" loading="lazy" decoding="async">
+          </button>
+          <button class="orbit-project-tile shape-square is-selected" type="button" data-orbit-project="morrow" data-project-number="03" role="option" aria-selected="true" aria-label="Open Morrow project">
+            <img src="figma-project-feature.png" alt="Morrow finance app on two mobile screens" width="1536" height="1024" decoding="async">
+          </button>
+          <button class="orbit-project-tile shape-tall" type="button" data-orbit-project="bazooka" data-project-number="04" role="option" aria-label="Select Bazooka project">
+            <img src="figma-project-bazooka.svg" alt="Bazooka brand project" loading="lazy" decoding="async">
+          </button>
+          <button class="orbit-project-tile shape-square" type="button" data-orbit-project="gather" data-project-number="01" role="option" aria-label="Select Gather project">
+            <img src="gather-screen-2.jpg" alt="Gather restaurant discovery screen" loading="lazy" decoding="async">
+          </button>
+          <button class="orbit-project-tile shape-tall" type="button" data-orbit-project="forma" data-project-number="05" role="option" aria-label="Select Forma project">
+            <img src="forma-case.webp" alt="Forma project planning experience" width="1536" height="1024" loading="lazy" decoding="async">
+          </button>
+          <button class="orbit-project-tile shape-square" type="button" data-orbit-project="morrow" data-project-number="03" role="option" aria-label="Select Morrow project">
+            <img src="morrow-screen-3.jpg" alt="Morrow insights screen" loading="lazy" decoding="async">
+          </button>
+          <button class="orbit-project-tile shape-tall" type="button" data-orbit-project="gather" data-project-number="01" role="option" aria-label="Select Gather project">
+            <img src="gather-screen-3.jpg" alt="Gather pickup flow" loading="lazy" decoding="async">
+          </button>
+        </div>
+
+        <div class="orbit-project-chapters" id="orbitProjectChapters" aria-label="Project stories">
+          <article class="orbit-project-chapter is-current" data-project-chapter="morrow" aria-hidden="false">
+            <div class="orbit-chapter-media">
+              <img class="orbit-chapter-cover" src="figma-project-feature.png" alt="Morrow finance app shown across two mobile devices" width="1536" height="1024" decoding="async">
+              <div class="orbit-chapter-screens" aria-hidden="true"><img src="morrow-screen-1.jpg" alt="" loading="lazy" decoding="async"><img src="morrow-screen-3.jpg" alt="" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="orbit-chapter-info"><span class="orbit-chapter-eyebrow">01 / 05 · CASE 03</span><h3>Morrow</h3><p>A calmer, clearer finance experience built around balance, insight, and effortless movement.</p><div><span>Mobile App</span><span>UX/UI Design</span><button type="button" data-open-project="morrow">View case study ↗</button></div></div>
+            <span class="orbit-chapter-next" aria-hidden="true">Keep scrolling <b>Gather next ↓</b></span>
+          </article>
+
+          <article class="orbit-project-chapter" data-project-chapter="gather" aria-hidden="true">
+            <div class="orbit-chapter-media">
+              <img class="orbit-chapter-cover" src="gather-case.webp" alt="Gather food discovery and pickup app interface" width="1536" height="1024" loading="lazy" decoding="async">
+              <div class="orbit-chapter-screens" aria-hidden="true"><img src="gather-screen-1.jpg" alt="" loading="lazy" decoding="async"><img src="gather-screen-3.jpg" alt="" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="orbit-chapter-info"><span class="orbit-chapter-eyebrow">02 / 05 · CASE 01</span><h3>Gather</h3><p>A warm food-discovery journey that turns choosing, customizing, and collecting a meal into one fluid flow.</p><div><span>Food Tech</span><span>Product Design</span><button type="button" data-open-project="gather">View case study ↗</button></div></div>
+            <span class="orbit-chapter-next" aria-hidden="true">Keep scrolling <b>Forma next ↓</b></span>
+          </article>
+
+          <article class="orbit-project-chapter" data-project-chapter="forma" aria-hidden="true">
+            <div class="orbit-chapter-media">
+              <img class="orbit-chapter-cover" src="forma-case.webp" alt="Forma project planning dashboard and workspace" width="1536" height="1024" loading="lazy" decoding="async">
+              <div class="orbit-chapter-screens orbit-chapter-screens-wide" aria-hidden="true"><img src="forma-screen-1.jpg" alt="" loading="lazy" decoding="async"><img src="forma-screen-3.jpg" alt="" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="orbit-chapter-info"><span class="orbit-chapter-eyebrow">03 / 05 · CASE 05</span><h3>Forma</h3><p>A focused web workspace balancing planning, team velocity, and the small moments that keep work moving.</p><div><span>Web App</span><span>Design System</span><button type="button" data-open-project="forma">View case study ↗</button></div></div>
+            <span class="orbit-chapter-next" aria-hidden="true">Keep scrolling <b>Olfah next ↓</b></span>
+          </article>
+
+          <article class="orbit-project-chapter is-logo-chapter chapter-olfah" data-project-chapter="olfah" aria-hidden="true">
+            <div class="orbit-chapter-media"><img class="orbit-chapter-cover" src="figma-project-olfah.svg" alt="Olfah brand identity project" loading="lazy" decoding="async"></div>
+            <div class="orbit-chapter-info"><span class="orbit-chapter-eyebrow">04 / 05 · CASE 02</span><h3>Olfah</h3><p>A friendly identity experience shaped to feel memorable, human, and immediately approachable.</p><div><span>Brand Experience</span><span>UX/UI</span><button type="button" data-open-project="olfah">Project preview ↗</button></div></div>
+            <span class="orbit-chapter-next" aria-hidden="true">Keep scrolling <b>Bazooka next ↓</b></span>
+          </article>
+
+          <article class="orbit-project-chapter is-logo-chapter chapter-bazooka" data-project-chapter="bazooka" aria-hidden="true">
+            <div class="orbit-chapter-media"><img class="orbit-chapter-cover" src="figma-project-bazooka.svg" alt="Bazooka brand and website project" loading="lazy" decoding="async"></div>
+            <div class="orbit-chapter-info"><span class="orbit-chapter-eyebrow">05 / 05 · CASE 04</span><h3>Bazooka</h3><p>A bold digital expression built with punchy art direction and a playful, unmistakable point of view.</p><div><span>Website</span><span>Art Direction</span><button type="button" data-open-project="bazooka">Project preview ↗</button></div></div>
+            <span class="orbit-chapter-next" aria-hidden="true">End of reel <b>Explore a project ↗</b></span>
+          </article>
+        </div>
+
+        <nav class="orbit-chapter-nav" aria-label="Jump between project stories">
+          <button class="is-active" type="button" data-chapter-jump="0" aria-label="Show Morrow project"><span>01</span><b>Morrow</b></button>
+          <button type="button" data-chapter-jump="1" aria-label="Show Gather project"><span>02</span><b>Gather</b></button>
+          <button type="button" data-chapter-jump="2" aria-label="Show Forma project"><span>03</span><b>Forma</b></button>
+          <button type="button" data-chapter-jump="3" aria-label="Show Olfah project"><span>04</span><b>Olfah</b></button>
+          <button type="button" data-chapter-jump="4" aria-label="Show Bazooka project"><span>05</span><b>Bazooka</b></button>
+        </nav>
+
+        <div class="orbit-project-footer" aria-hidden="true">
+          <span class="orbit-project-label">SELECTED PROJECTS</span>
+          <i><b></b></i>
+          <span class="orbit-project-count">05 PROJECTS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 / UI DESIGN PAGES (Visual Interface Gallery) -->
+    <section class="ui-showcase" id="legacy-ui-pages" aria-labelledby="uiPagesHeading" hidden>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">02 / UI DESIGN PAGES</span>
+          <h2 id="uiPagesHeading">Interface gallery.</h2>
+          <p>Key screens from fintech, on-demand food tech, and workspace productivity platforms. 40% visual design, 60% system thinking.</p>
+        </div>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="ui-filter-bar" role="tablist" aria-label="Filter UI design pages">
+        <button class="ui-filter-pill active" type="button" data-filter="all">All Screens (9)</button>
+        <button class="ui-filter-pill" type="button" data-filter="morrow">Fintech · Morrow</button>
+        <button class="ui-filter-pill" type="button" data-filter="gather">Food Tech · Gather</button>
+        <button class="ui-filter-pill" type="button" data-filter="forma">SaaS · Forma</button>
+      </div>
+
+      <!-- UI Cards Grid -->
+      <div class="ui-showcase-grid">
+        <!-- Screen 1: Morrow Home -->
+        <article class="ui-showcase-card" data-project-ref="morrow" data-screen-img="morrow-screen-1.jpg" data-screen-title="Morrow — Home &amp; Balance Overview" data-screen-desc="Clean visual hierarchy placing total balance, instant transfer buttons, and spending velocity above the fold." data-screen-tag="01 / FINTECH DASHBOARD">
+          <div class="ui-showcase-media">
+            <img src="morrow-screen-1.jpg" alt="Morrow Home Dashboard UI screen" loading="lazy" decoding="async">
+            <button type="button" class="ui-showcase-zoom" aria-label="Inspect screen full size">Zoom Screen ↗</button>
+          </div>
+          <div class="ui-showcase-meta">
+            <span class="ui-showcase-tag">FINTECH · MOBILE</span>
+            <h3>Home &amp; Account Overview</h3>
+            <p>High-contrast net balance with instant action triggers and prioritized transactions.</p>
+            <button class="ui-showcase-btn" type="button" data-project="morrow">View Case Study →</button>
+          </div>
+        </article>
+
+        <!-- Screen 2: Morrow Analytics -->
+        <article class="ui-showcase-card" data-project-ref="morrow" data-screen-img="morrow-screen-2.jpg" data-screen-title="Morrow — Spending Breakdown &amp; Budgeting" data-screen-desc="Interactive monthly spending donut chart, category budgets, and weekly comparison velocity." data-screen-tag="02 / FINTECH ANALYTICS">
+          <div class="ui-showcase-media">
+            <img src="morrow-screen-2.jpg" alt="Morrow Spending Analytics and Donut Chart UI screen" loading="lazy" decoding="async">
+            <button type="button" class="ui-showcase-zoom" aria-label="Inspect screen full size">Zoom Screen ↗</button>
+          </div>
+          <div class="ui-showcase-meta">
+            <span class="ui-showcase-tag">FINTECH · ANALYTICS</span>
+            <h3>Spending &amp; Budget Trends</h3>
+            <p>Visual monthly donut distribution and category budget progress indicators.</p>
+            <button class="ui-showcase-btn" type="button" data-project="morrow">View Case Study →</button>
+          </div>
+        </article>
+
+        <!-- Screen 3: Morrow Transfer Flow -->
+        <article class="ui-showcase-card" data-project-ref="morrow" data-screen-img="morrow-screen-3.jpg" data-screen-title="Morrow — Fast Send &amp; Transfer Journey" data-screen-desc="Frictionless 3-tap money transfer with contact avatars, category selector, and confirmation state." data-screen-tag="03 / PAYMENT FLOW">
+          <div class="ui-showcase-media">
+            <img src="morrow-screen-3.jpg" alt="Morrow Send Money UI flow screen" loading="lazy" decoding="async">
+            <button type="button" class="ui-showcase-zoom" aria-label="Inspect screen full size">Zoom Screen ↗</button>
+          </div>
+          <div class="ui-showcase-meta">
+            <span class="ui-showcase-tag">FINTECH · TRANSACTIONS</span>
+            <h3>3-Tap Payment Flow</h3>
+            <p>Streamlined money transfer with avatar selection and transparent categorization.</p>
+            <button class="ui-showcase-btn" type="button" data-project="morrow">View Case Study →</button>
+          </div>
+        </article>
+
+        <!-- Screen 4: Gather Menu Discovery -->
+        <article class="ui-showcase-card" data-project-ref="gather" data-screen-img="gather-screen-1.jpg" data-screen-title="Gather — Gourmet Discovery Feed" data-screen-desc="Warm culinary palette, category pills, meal prep times, and curated fresh dish cards." data-screen-tag="01 / FOOD DISCOVERY">
+          <div class="ui-showcase-media">
+            <img src="gather-screen-1.jpg" alt="Gather food menu discovery feed UI screen" loading="lazy" decoding="async">
+            <button type="button" class="ui-showcase-zoom" aria-label="Inspect screen full size">Zoom Screen ↗</button>
+          </div>
+          <div class="ui-showcase-meta">
+            <span class="ui-showcase-tag">FOOD TECH · MOBILE</span>
+            <h3>Gourmet Menu Discovery</h3>
+            <p>Appetizing photography framing, prep time indicators, and instant category filters.</p>
+            <button class="ui-showcase-btn" type="button" data-project="gather">View Case Study →</button>
+          </div>
+        </article>
+
+        <!-- Screen 5: Gather Dish Detail & Customization -->
+        <article class="ui-showcase-card" data-project-ref="gather" data-screen-img="gather-screen-3.jpg" data-screen-title="Gather — Item Detail &amp; Dietary Customization" data-screen-desc="Ingredient transparency, dietary chips, single-tap dressing selectors, and sticky add-to-bag action." data-screen-tag="02 / ORDER CUSTOMIZATION">
+          <div class="ui-showcase-media">
+            <img src="gather-screen-3.jpg" alt="Gather dish detail and customization UI screen" loading="lazy" decoding="async">
+            <button type="button" class="ui-showcase-zoom" aria-label="Inspect screen full size">Zoom Screen ↗</button>
+          </div>
+          <div class="ui-showcase-meta">
+            <span class="ui-showcase-tag">FOOD TECH · CUSTOMIZATION</span>
+            <h3>Dish Customization &amp; Bag</h3>
+            <p>Calm ingredient choices and real-time pricing prevent ordering errors.</p>
+            <button class="ui-showcase-btn" type="button" data-project="gather">View Case Study →</button>
+          </div>
+        </article>
+
+        <!-- Screen 6: Gather Live Tracker & Pass -->
+        <article class="ui-showcase-card" data-project-ref="gather" data-screen-img="gather-screen-2.jpg" data-screen-title="Gather — Realtime Pickup Status &amp; QR Pass" data-screen-desc="Live 3-stage progress timeline, pickup window, and high-contrast counter barcode." data-screen-tag="03 / LIVE STATUS">
+          <div class="ui-showcase-media">
+            <img src="gather-screen-2.jpg" alt="Gather live order tracking and QR pass UI screen" loading="lazy" decoding="async">
+            <button type="button" class="ui-showcase-zoom" aria-label="Inspect screen full size">Zoom Screen ↗</button>
+          </div>
+          <div class="ui-showcase-meta">
+            <span class="ui-showcase-tag">FOOD TECH · TRACKING</span>
+            <h3>Live Status &amp; Pickup Pass</h3>
+            <p>3-stage timeline and scannable QR pass eliminate counter waiting confusion.</p>
+            <button class="ui-showcase-btn" type="button" data-project="gather">View Case Study →</button>
+          </div>
+        </article>
+
+        <!-- Screen 7: Forma Desktop Dashboard -->
+        <article class="ui-showcase-card card-wide" data-project-ref="forma" data-screen-img="forma-screen-1.jpg" data-screen-title="Forma — Focus Workspace &amp; Velocity Dashboard" data-screen-desc="Spacious desktop SaaS canvas with persistent modular sidebar, focus velocity metrics, and project cards." data-screen-tag="01 / DESKTOP DASHBOARD">
+          <div class="ui-showcase-media">
+            <img src="forma-screen-1.jpg" alt="Forma desktop workspace dashboard UI screen" loading="lazy" decoding="async">
+            <button type="button" class="ui-showcase-zoom" aria-label="Inspect screen full size">Zoom Screen ↗</button>
+          </div>
+          <div class="ui-showcase-meta">
+            <span class="ui-showcase-tag">SAAS · DESKTOP WEB</span>
+            <h3>Workspace Overview</h3>
+            <p>High-level velocity metrics and active project cards in a serene desktop canvas.</p>
+            <button class="ui-showcase-btn" type="button" data-project="forma">View Case Study →</button>
+          </div>
+        </article>
+
+        <!-- Screen 8: Forma Sprint Canvas -->
+        <article class="ui-showcase-card card-wide" data-project-ref="forma" data-screen-img="forma-screen-2.jpg" data-screen-title="Forma — Design System &amp; Kanban Sprint Canvas" data-screen-desc="Multi-column workflow board with tokenized tags, teammate avatars, and keyboard navigation." data-screen-tag="02 / PROJECT CANVAS">
+          <div class="ui-showcase-media">
+            <img src="forma-screen-2.jpg" alt="Forma project kanban board UI screen" loading="lazy" decoding="async">
+            <button type="button" class="ui-showcase-zoom" aria-label="Inspect screen full size">Zoom Screen ↗</button>
+          </div>
+          <div class="ui-showcase-meta">
+            <span class="ui-showcase-tag">SAAS · WORKFLOW</span>
+            <h3>Sprint &amp; Token Canvas</h3>
+            <p>Multi-column board with tag pills and clear status indicators built for design ops.</p>
+            <button class="ui-showcase-btn" type="button" data-project="forma">View Case Study →</button>
+          </div>
+        </article>
+
+        <!-- Screen 9: Forma Team Velocity Analytics -->
+        <article class="ui-showcase-card card-wide" data-project-ref="forma" data-screen-img="forma-screen-3.jpg" data-screen-title="Forma — Team Velocity &amp; Workload Analytics" data-screen-desc="Sprint burndown curves, focus time distribution, and workload capacity indicators." data-screen-tag="03 / ANALYTICS">
+          <div class="ui-showcase-media">
+            <img src="forma-screen-3.jpg" alt="Forma team analytics and velocity UI screen" loading="lazy" decoding="async">
+            <button type="button" class="ui-showcase-zoom" aria-label="Inspect screen full size">Zoom Screen ↗</button>
+          </div>
+          <div class="ui-showcase-meta">
+            <span class="ui-showcase-tag">SAAS · ANALYTICS</span>
+            <h3>Team Velocity &amp; Analytics</h3>
+            <p>Sprint burndown charts and workload distribution for creative design teams.</p>
+            <button class="ui-showcase-btn" type="button" data-project="forma">View Case Study →</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 03 / THE DETAILS (Design Principles) -->
+    <section class="principles section" aria-labelledby="principlesTitle">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">03 / THE DETAILS</span>
+          <h2 id="principlesTitle">Designed to feel easy.</h2>
+        </div>
+      </div>
+      <div class="principles-grid">
+        <article>
+          <div class="principle-preview clarity-preview" aria-hidden="true">
+            <div class="clarity-sheet"><i class="ui-kicker"></i><i class="ui-title"></i><div class="ui-lines"><i></i><i></i></div><i class="ui-action"></i></div>
+          </div>
+          <div class="principle-caption">
+            <h3>Clarity</h3>
+            <p>Less to decode.</p>
+          </div>
+        </article>
+        <article>
+          <div class="principle-preview flow-preview" aria-hidden="true">
+            <div class="flow-track"><i></i><i></i><i></i></div>
+            <div class="flow-sheet"><i></i><i></i><b>✓</b></div>
+          </div>
+          <div class="principle-caption">
+            <h3>Flow</h3>
+            <p>Fewer steps.</p>
+          </div>
+        </article>
+        <article>
+          <div class="principle-preview delight-preview" aria-hidden="true">
+            <div class="delight-control"><span>✓</span><i></i></div>
+          </div>
+          <div class="principle-caption">
+            <h3>Delight</h3>
+            <p>A little personality.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 04 / PLAY BREAK -->
+    <section class="play section" id="play">
+      <div class="memory-game" id="pixelPairs">
+        <div class="game-intro">
+          <span class="eyebrow" id="gameEyebrow">PIXEL PAIRS</span>
+          <div class="game-title-row">
+            <h3 id="gameTitle">Good eyes. Great matches.</h3>
+            <button class="game-switch" id="gameSwitch" aria-controls="gameBoard">Color Hunt <span aria-hidden="true">◈</span></button>
+          </div>
+          <p id="gameInstructions" class="sr-only">Find six pairs. +100 per match, −10 per miss.</p>
+          <div class="game-hud">
+            <div class="hud-value"><span>Score</span><b id="gameScore">0</b></div>
+            <div class="hud-value"><span>Best</span><b id="gameBest">0</b></div>
+            <button class="game-restart" id="gameReset" type="button" aria-label="Restart game"><span aria-hidden="true">↻</span></button>
+          </div>
+          <span class="sr-only"><b id="gamePairs">0</b><span id="gameGoalLabel"> / 6 pairs</span></span>
+          <p id="gameStatus" class="sr-only" role="status" aria-live="polite">Find your first pair.</p>
+        </div>
+        <div id="gameBoard" class="game-board" role="group" aria-label="Pixel Pairs matching tiles"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Scenic Footer -->
+  <footer class="scenic-footer" id="contact">
+    <div class="footer-inner">
+      <section class="footer-brief" aria-labelledby="briefTitle">
+        <div class="footer-brief-copy">
+          <span class="eyebrow">LET’S START WITH AN IDEA</span>
+          <h2 id="briefTitle" tabindex="-1">What’s your idea?</h2>
+          <p>A new product, a better experience, or something unexpected. Tell me what you have in mind.</p>
+        </div>
+        <form id="briefForm">
+          <label>Your name<input name="name" required autocomplete="name" placeholder="How should I call you?"></label>
+          <label>Email<input type="email" name="email" required autocomplete="email" placeholder="you@company.com"></label>
+          <label>Project type<select name="type" required><option value="" selected disabled>Choose a project type</option><option value="App">App</option><option value="Website">Website</option><option value="UI Design">UI Design</option></select></label>
+          <label>Tell me about the project<textarea name="project" required rows="4" placeholder="The idea, the challenge, and what you want to achieve…"></textarea></label>
+          <div class="brief-actions">
+            <button class="pill dark" type="submit" value="email">Send by email <span>↗</span></button>
+            <button class="pill brief-whatsapp" type="submit" value="whatsapp">Send on WhatsApp <span>↗</span></button>
+          </div>
+        </form>
+      </section>
+    </div>
+    <div class="footer-scene layered-scene" id="contactVisual" role="group" aria-label="Alexandria panorama with Qaitbay Citadel and Bibliotheca Alexandrina">
+      <button class="brief-fab" id="contactButton" type="button" aria-label="Go to project brief"><span class="brief-fab-label">Write a brief</span><span class="brief-fab-icon" aria-hidden="true">+</span></button>
+      <img class="scene-layer scene-sea" data-depth=".035" data-light-src="alexandria-sea-v2.webp" data-dark-src="alexandria-sea-night.png" src="alexandria-sea-v2.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+      <img class="scene-layer scene-coast" data-depth=".16" data-light-src="alexandria-coast-v2.webp" data-dark-src="alexandria-coast-night.png" src="alexandria-coast-v2.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+      <img class="scene-layer scene-shore" data-depth=".42" data-light-src="alexandria-shore-v2.webp" data-dark-src="alexandria-shore-night.png" src="alexandria-shore-v2.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+      <div class="footer-bottom">
+        <p>© <span id="year">2026</span> Karem Ehab</p>
+        <span>Made with curiosity.</span>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="caseDialog" class="case-dialog">
+    <button class="close case-close" aria-label="Close case study">×</button>
+    <div id="caseContent"></div>
+  </dialog>
+
+  <div id="toast" role="status"></div>
+  <noscript><style>.site-loader,.asset-loader{display:none}.header-menu[hidden]{display:block!important}.menu-toggle{display:none}</style></noscript>
+  <script src="preferences.js?v=space-2"></script>
+  <script src="app.js?v=space-2"></script>
+  <script src="interactions.js?v=space-2"></script>
+  <script src="navigation.js?v=space-2"></script>
+  <script src="cursor.js?v=space-2"></script>
+  <script src="hero-motion.js?v=space-2"></script>
+</body>
+</html>

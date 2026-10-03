@@ -23,9 +23,6 @@
     });
   }
 
-  if (header) {
-    window.addEventListener('scroll', () => header.classList.toggle('is-docked', window.scrollY > 40), { passive: true });
-  }
 
   const yearEl = document.querySelector('#year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
